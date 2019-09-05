@@ -1,0 +1,6 @@
+*.yml
+.*/
+!.hlint.yaml
+README.md
+bin/
+dist/

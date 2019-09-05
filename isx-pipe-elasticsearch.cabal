@@ -1,0 +1,153 @@
+cabal-version:          2.4
+name:                   isx-pipe-elasticsearch
+version:                0.0
+synopsis:               Isoxya Pipeline Elasticsearch
+license:                BSD-3-Clause
+license-file:           LICENSE
+author:                 Pavouk OÜ
+maintainer:             en@pavouk.tech
+build-type:             Simple
+extra-source-files:     README.md
+--------------------------------------------------------------------------------
+library pvk-com
+    exposed-modules:
+        PVK.Com.API.Aeson
+        PVK.Com.API.Req
+        PVK.Com.API.Res
+        PVK.Com.API.Resource.CommonError
+        PVK.Com.API.Resource.ISXPipe
+        PVK.Com.API.Resource.ISXPipeSnap
+        PVK.Com.API.Zone.Common.Error
+    other-modules:
+        PVK.Com.API.Ext.URI
+        Prelude
+    build-depends:
+        base-noprelude                  ==  4.12.*,
+        relude,
+        --
+        aeson,
+        base64-bytestring,
+        network-uri,
+        snap-core,
+        snap-extras,
+        time,
+        unordered-containers,
+        vector
+    hs-source-dirs:
+        lib/pvk-com/src
+    default-language:   Haskell2010
+    default-extensions:
+        OverloadedStrings
+    ghc-options:
+        -Wall
+
+library isx-pipe-elasticsearch-int
+    exposed-modules:
+        ISX.Pipe.Elasticsearch.Route
+        ISX.Pipe.Elasticsearch.Zone.Common.Apex
+        ISX.Pipe.Elasticsearch.Zone.Common.Data
+    other-modules:
+        ISX.Pipe.Elasticsearch.Resource.Common
+        Prelude
+    build-depends:
+        base-noprelude                  ==  4.12.*,
+        relude,
+        --
+        pvk-com,
+        --
+        aeson,
+        bytestring,
+        containers,
+        network-uri,
+        snap-core,
+        snap-extras,
+        text,
+        time
+    hs-source-dirs:
+        src
+    default-language:   Haskell2010
+    default-extensions:
+        OverloadedStrings
+    ghc-options:
+        -Wall
+--------------------------------------------------------------------------------
+executable isx-pipe-elasticsearch
+    main-is:            Main.hs
+    other-modules:
+        Prelude
+    build-depends:
+        base-noprelude                  ==  4.12.*,
+        relude,
+        --
+        pvk-com,
+        isx-pipe-elasticsearch-int,
+        --
+        snap-server
+    hs-source-dirs:
+        src/ISX/Pipe/Elasticsearch/Bin
+    default-language:   Haskell2010
+    default-extensions:
+        OverloadedStrings
+    ghc-options:
+        -Wall
+        -threaded
+--------------------------------------------------------------------------------
+library pvk-com-test
+    exposed-modules:
+        PVK.Com.API.Test
+    other-modules:
+        Prelude
+    build-depends:
+        base-noprelude                  ==  4.12.*,
+        relude,
+        --
+        hspec                           ==  2.*,
+        --
+        pvk-com,
+        --
+        aeson,
+        base64-bytestring,
+        bytestring,
+        http-link-header,
+        lens,
+        lens-aeson,
+        snap-core
+    hs-source-dirs:
+        lib/pvk-com/test
+    default-language:   Haskell2010
+    default-extensions:
+        OverloadedStrings
+    ghc-options:
+        -Wall
+
+test-suite isx-pipe-elasticsearch-test
+    type:               exitcode-stdio-1.0
+    main-is:            Spec.hs
+    other-modules:
+        ISX.Pipe.Elasticsearch.Zone.Common.ApexSpec
+        ISX.Pipe.Elasticsearch.Zone.Common.DataSpec
+        ISX.Test
+        Prelude
+    build-depends:
+        base-noprelude                  ==  4.12.*,
+        relude,
+        --
+        hlint                           ==  2.1.17,
+        hspec                           ==  2.*,
+        --
+        isx-pipe-elasticsearch-int,
+        pvk-com,
+        pvk-com-test,
+        --
+        containers
+    hs-source-dirs:
+        test
+    build-tool-depends:
+        hspec-discover:hspec-discover   ==  2.*
+    default-language:   Haskell2010
+    default-extensions:
+        OverloadedStrings
+    ghc-options:
+        -Wall
+        -threaded
+--------------------------------------------------------------------------------

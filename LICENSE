@@ -1,0 +1,392 @@
+BSD 3-Clause License
+
+Copyright © 2019 Pavouk OÜ
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+================================================================================
+* Cabal
+    License:  BSD3
+* HUnit
+    License:  BSD3
+* QuickCheck
+    License:  BSD3
+* StateVar
+    License:  BSD3
+* adjunctions
+    License:  BSD3
+* aeson
+    License:  BSD3
+* ansi-terminal
+    License:  BSD3
+* array
+    License:  BSD3
+* attoparsec
+    License:  BSD3
+* attoparsec-iso8601
+    License:  BSD3
+* base
+    License:  BSD-3-Clause
+* base-compat
+    License:  MIT
+* base-noprelude
+    License:  BSD-3-Clause
+* base-orphans
+    License:  MIT
+* base64-bytestring
+    License:  BSD3
+* basement
+    License:  BSD3
+* bifunctors
+    License:  BSD3
+* binary
+    License:  BSD3
+* blaze-builder
+    License:  BSD3
+* blaze-html
+    License:  BSD3
+* blaze-markup
+    License:  BSD3
+* byteable
+    License:  BSD3
+* bytestring
+    License:  BSD3
+* bytestring-builder
+    License:  BSD3
+* bytestring-conversion
+    License:  MPL-2.0
+* cabal-doctest
+    License:  BSD3
+* call-stack
+    License:  MIT
+* case-insensitive
+    License:  BSD3
+* cereal
+    License:  BSD3
+* cipher-aes
+    License:  BSD3
+* clientsession
+    License:  MIT
+* clock
+    License:  BSD3
+* cmdargs
+    License:  BSD3
+* colour
+    License:  MIT
+* comonad
+    License:  BSD3
+* conduit
+    License:  MIT
+* configurator
+    License:  BSD3
+* containers
+    License:  BSD3
+* contravariant
+    License:  BSD3
+* cookie
+    License:  MIT
+* cpphs
+    License:  LGPL
+* cprng-aes
+    License:  BSD3
+* crypto-api
+    License:  BSD3
+* crypto-cipher-types
+    License:  BSD3
+* crypto-random
+    License:  BSD3
+* cryptohash
+    License:  BSD3
+* cryptonite
+    License:  BSD3
+* data-default
+    License:  BSD3
+* data-default-class
+    License:  BSD3
+* data-default-instances-containers
+    License:  BSD3
+* data-default-instances-dlist
+    License:  BSD3
+* data-default-instances-old-locale
+    License:  BSD3
+* deepseq
+    License:  BSD3
+* digestive-functors
+    License:  BSD3
+* digestive-functors-heist
+    License:  BSD3
+* digestive-functors-snap
+    License:  BSD3
+* directory
+    License:  BSD3
+* directory-tree
+    License:  BSD3
+* distributive
+    License:  BSD3
+* dlist
+    License:  BSD3
+* double-conversion
+    License:  BSD3
+* entropy
+    License:  BSD3
+* errors
+    License:  BSD3
+* exceptions
+    License:  BSD3
+* extra
+    License:  BSD3
+* fail
+    License:  BSD3
+* filepath
+    License:  BSD3
+* free
+    License:  BSD3
+* ghc
+    License:  BSD3
+* ghc-boot
+    License:  BSD3
+* ghc-boot-th
+    License:  BSD3
+* ghc-compact
+    License:  BSD3
+* ghc-heap
+    License:  BSD-3-Clause
+* ghc-prim
+    License:  BSD-3-Clause
+* ghci
+    License:  BSD3
+* hashable
+    License:  BSD3
+* haskeline
+    License:  BSD3
+* haskell-src-exts
+    License:  BSD3
+* haskell-src-exts-util
+    License:  BSD3
+* haskell-src-meta
+    License:  BSD3
+* heist
+    License:  BSD3
+* hlint
+    License:  BSD3
+* hpc
+    License:  BSD3
+* hscolour
+    License:  LGPL
+* hspec
+    License:  MIT
+* hspec-core
+    License:  MIT
+* hspec-discover
+    License:  MIT
+* hspec-expectations
+    License:  MIT
+* http-api-data
+    License:  BSD3
+* http-link-header
+    License:  PublicDomain
+* http-types
+    License:  BSD3
+* integer-gmp
+    License:  BSD3
+* integer-logarithms
+    License:  MIT
+* invariant
+    License:  BSD2
+* io-streams
+    License:  BSD3
+* io-streams-haproxy
+    License:  BSD3
+* jmacro
+    License:  BSD3
+* kan-extensions
+    License:  BSD3
+* lens
+    License:  BSD2
+* lens-aeson
+    License:  MIT
+* libiserv
+    License:  BSD-3-Clause
+* libyaml
+    License:  BSD3
+* lifted-base
+    License:  BSD3
+* map-syntax
+    License:  BSD3
+* math-functions
+    License:  BSD2
+* memory
+    License:  BSD3
+* monad-control
+    License:  BSD3
+* mono-traversable
+    License:  MIT
+* mtl
+    License:  BSD3
+* mwc-random
+    License:  BSD3
+* network
+    License:  BSD3
+* network-uri
+    License:  BSD3
+* old-locale
+    License:  BSD3
+* old-time
+    License:  BSD3
+* parallel
+    License:  BSD3
+* parseargs
+    License:  BSD3
+* parsec
+    License:  BSD3
+* pcre-light
+    License:  BSD3
+* polyparse
+    License:  LGPL
+* pretty
+    License:  BSD3
+* primitive
+    License:  BSD-3-Clause
+* process
+    License:  BSD3
+* profunctors
+    License:  BSD3
+* pwstore-fast
+    License:  BSD3
+* quickcheck-io
+    License:  MIT
+* random
+    License:  BSD3
+* readable
+    License:  BSD3
+* refact
+    License:  BSD3
+* reflection
+    License:  BSD3
+* regex-base
+    License:  BSD3
+* regex-posix
+    License:  BSD3
+* relude
+    License:  MIT
+* resourcet
+    License:  BSD3
+* rts
+    License:  BSD-3-Clause
+* safe
+    License:  BSD3
+* scientific
+    License:  BSD3
+* securemem
+    License:  BSD3
+* semigroupoids
+    License:  BSD3
+* semigroups
+    License:  BSD3
+* setenv
+    License:  MIT
+* skein
+    License:  BSD3
+* snap
+    License:  BSD3
+* snap-core
+    License:  BSD3
+* snap-extras
+    License:  BSD3
+* snap-server
+    License:  BSD3
+* split
+    License:  BSD3
+* splitmix
+    License:  BSD3
+* stm
+    License:  BSD3
+* syb
+    License:  BSD3
+* tagged
+    License:  BSD3
+* template-haskell
+    License:  BSD3
+* terminfo
+    License:  BSD3
+* text
+    License:  BSD2
+* tf-random
+    License:  BSD3
+* th-abstraction
+    License:  ISC
+* th-expand-syns
+    License:  BSD3
+* th-lift
+    License:  BSD3
+* th-lift-instances
+    License:  BSD3
+* th-orphans
+    License:  BSD3
+* th-reify-many
+    License:  BSD3
+* time
+    License:  BSD3
+* time-compat
+    License:  BSD3
+* transformers
+    License:  BSD3
+* transformers-base
+    License:  BSD3
+* transformers-compat
+    License:  BSD3
+* uniplate
+    License:  BSD3
+* unix
+    License:  BSD3
+* unix-compat
+    License:  BSD3
+* unliftio-core
+    License:  MIT
+* unordered-containers
+    License:  BSD3
+* uuid-types
+    License:  BSD3
+* vector
+    License:  BSD3
+* vector-algorithms
+    License:  BSD3
+* vector-th-unbox
+    License:  BSD3
+* void
+    License:  BSD3
+* wl-pprint-text
+    License:  BSD3
+* xhtml
+    License:  BSD3
+* xmlhtml
+    License:  BSD3
+* yaml
+    License:  BSD3
+* zlib
+    License:  BSD3
+* zlib-bindings
+    License:  BSD3

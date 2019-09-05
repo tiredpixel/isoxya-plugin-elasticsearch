@@ -1,0 +1,18 @@
+version: "2.4"
+services:
+  pipe_elasticsearch:
+    env_file: .env
+    build: .
+    volumes:
+      - ./isx-pipe-elasticsearch.cabal:/home/x/src/isx-pipe-elasticsearch.cabal
+      - ./lib:/home/x/src/lib
+      - ./src:/home/x/src/src
+      - ./test:/home/x/src/test
+    networks:
+      pipe:
+        aliases:
+          - elasticsearch.pipe.proc.isoxya.pavouk.tech
+networks:
+  pipe:
+    external: true
+    name: isx_pipe
