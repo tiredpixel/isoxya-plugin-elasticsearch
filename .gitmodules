@@ -1,0 +1,3 @@
+[submodule "lib/pvk-com"]
+	path = lib/pvk-com
+	url = git@github.com:pavouk-0/pavouk-common-hs.git
