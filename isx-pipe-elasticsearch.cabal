@@ -18,6 +18,7 @@ library pvk-com
         PVK.Com.API.Resource.ISXPipe
         PVK.Com.API.Resource.ISXPipeSnap
         PVK.Com.API.Zone.Common.Error
+        PVK.Com.Net
     other-modules:
         PVK.Com.API.Ext.URI
         Prelude
@@ -27,6 +28,7 @@ library pvk-com
         --
         aeson,
         base64-bytestring,
+        http-conduit,
         network-uri,
         snap-core,
         snap-extras,
@@ -57,10 +59,10 @@ library isx-pipe-elasticsearch-int
         --
         aeson,
         bytestring,
-        conduit,
-        conduit-extra,
         containers,
+        cryptonite,
         http-conduit,
+        http-types,
         network-uri,
         snap-core,
         snap-extras,
@@ -85,7 +87,6 @@ executable isx-pipe-elasticsearch
         pvk-com,
         isx-pipe-elasticsearch-int,
         --
-        http-conduit,
         network-uri,
         snap-server
     hs-source-dirs:
@@ -145,7 +146,6 @@ test-suite isx-pipe-elasticsearch-test
         pvk-com-test,
         --
         containers,
-        http-conduit,
         network-uri
     hs-source-dirs:
         test
