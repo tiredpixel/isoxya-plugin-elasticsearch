@@ -57,7 +57,10 @@ library isx-pipe-elasticsearch-int
         --
         aeson,
         bytestring,
+        conduit,
+        conduit-extra,
         containers,
+        http-conduit,
         network-uri,
         snap-core,
         snap-extras,
@@ -82,6 +85,8 @@ executable isx-pipe-elasticsearch
         pvk-com,
         isx-pipe-elasticsearch-int,
         --
+        http-conduit,
+        network-uri,
         snap-server
     hs-source-dirs:
         src/ISX/Pipe/Elasticsearch/Bin
@@ -139,7 +144,9 @@ test-suite isx-pipe-elasticsearch-test
         pvk-com,
         pvk-com-test,
         --
-        containers
+        containers,
+        http-conduit,
+        network-uri
     hs-source-dirs:
         test
     build-tool-depends:

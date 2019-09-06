@@ -13,6 +13,7 @@ services:
         aliases:
           - elasticsearch.pipe.proc.isoxya.pavouk.tech
       db: {}
+      test: {}
   web:
     env_file: .env
     image: kibana:7.3.1
@@ -27,6 +28,10 @@ services:
       - db:/usr/share/elasticsearch/data
     networks:
       - db
+  test_echo:
+    image: keisato/http-echo
+    networks:
+      - test
 volumes:
   db: {}
 networks:
@@ -35,3 +40,4 @@ networks:
   pipe:
     external: true
     name: isx_pipe
+  test: {}

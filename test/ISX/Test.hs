@@ -5,8 +5,14 @@ module ISX.Test (
 
 
 import              ISX.Pipe.Elasticsearch.Route
+import              Network.URI
 import              PVK.Com.API.Test
+import              System.Environment                      (getEnv)
+import qualified    Network.HTTP.Conduit                    as  Net
 
 
 withSrv :: RequestBuilder IO () -> IO Response
-withSrv r = runHandler r site
+withSrv r = do
+    Just eUrl <- parseAbsoluteURI <$> getEnv "_TEST_ELASTICSEARCH_HOSTS"
+    n <- Net.newManager Net.tlsManagerSettings
+    runHandler r $ site eUrl n
