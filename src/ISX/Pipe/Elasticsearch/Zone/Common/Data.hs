@@ -26,6 +26,7 @@ create dUrl n = do
     uRes <- liftIO $ Net.makeRes uReq n
     modifyResponse $ setResponseCode $
         HTTPTS.statusCode $ HTTP.responseStatus uRes
+    writeLBS $ HTTP.responseBody uRes
     where
         s = 50000000 -- 50 MB
 
