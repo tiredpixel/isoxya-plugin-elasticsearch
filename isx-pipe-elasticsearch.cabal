@@ -66,6 +66,7 @@ library isx-pipe-elasticsearch-int
         lens,
         lens-aeson,
         network-uri,
+        scientific,
         snap-core,
         snap-extras,
         text,

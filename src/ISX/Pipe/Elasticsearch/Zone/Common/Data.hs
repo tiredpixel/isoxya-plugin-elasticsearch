@@ -6,6 +6,7 @@ module ISX.Pipe.Elasticsearch.Zone.Common.Data (
 import              Control.Lens
 import              Data.Aeson
 import              Data.Aeson.Lens
+import              Data.Scientific                         (scientific)
 import              PVK.Com.API.Aeson
 import              PVK.Com.API.Resource.ISXPipeSnap        ()
 import              Snap.Core
@@ -26,21 +27,27 @@ create dUrl n = do
     req_      <- Req.getBoundedJSON' s >>= Req.validateJSON
     Just drpl <- Res.runValidate req_
     let Just reqUrl = dEndpoint dUrl drpl
-    let drpl' = convDroplet drpl
-    let uReq = Net.jsonReq $ Net.makeReq' "POST" reqUrl $ encode drpl'
-    uRes <- liftIO $ Net.makeRes uReq n
-    modifyResponse $ setResponseCode $
-        HTTPTS.statusCode $ HTTP.responseStatus uRes
-    writeLBS $ HTTP.responseBody uRes
+    let drpls' = convDroplet drpl
+    let results_n = toInteger $ length drpls'
+    for_ (zip [1..] drpls') $ \(i, drpl') -> do
+        let uJson = mergeObject (toJSON drpl') $ object [
+                ("data_i", Number $ scientific i 0),
+                ("data_n", Number $ scientific results_n 0)]
+        let uBody = encode uJson <> "\n" -- newline to make testing easier
+        let uReq = Net.jsonReq $ Net.makeReq' "POST" reqUrl uBody
+        uRes <- liftIO $ Net.makeRes uReq n
+        modifyResponse $ setResponseCode $
+            HTTPTS.statusCode $ HTTP.responseStatus uRes
+        writeLBS $ HTTP.responseBody uRes
     where
         s = 50000000 -- 50 MB
 
 
-convDroplet :: R.Droplet -> R.Droplet
+convDroplet :: R.Droplet -> [R.Droplet]
 convDroplet drpl = if isSpellchecker
-    then drpl {
-        R.dropletData = toJSON dataSpellchecker}
-    else drpl
+    then [drpl {
+        R.dropletData = datum} | datum <- dataSpellchecker]
+    else [drpl]
     where
         d = R.dropletData drpl
         -- TODO: replace type detection with explicit pickax type [#952]
