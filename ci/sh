@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+USER=x
+
+chown -R ${USER}:root /tmp/build
+
+setuidgid ${USER} "$@"

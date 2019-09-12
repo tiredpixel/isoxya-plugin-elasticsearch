@@ -1,0 +1,10 @@
+platform: linux
+inputs:
+  - name: src
+outputs:
+  - name: pkg
+run:
+  user: root
+  path: src/ci/sh
+  args:
+    - src/ci/package.sh

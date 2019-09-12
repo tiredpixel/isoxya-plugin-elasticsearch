@@ -1,0 +1,10 @@
+platform: linux
+inputs:
+  - name: src
+params:
+  VERSION: 0.0.0
+run:
+  user: root
+  path: src/ci/sh
+  args:
+    - src/ci/test.sh
