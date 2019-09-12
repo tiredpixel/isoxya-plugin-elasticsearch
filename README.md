@@ -5,6 +5,34 @@
 [Isoxya](https://www.pavouk.tech/category/isoxya/) is a High-Performance Internet Data Processor and Web Crawler. It is designed as a next-generation web crawler, scalable for large sites (millions of pages), cost-effective for tiny sites (1+ pages), offering flexible data processing using multi-industry plugins, delivering results via data streaming to multiple storage backends. It is magicked via a REST API using JSON, and is available now for private preview.
 
 
+## Setup (Elastic Stack)
+
+### Auth
+
+- create role `isx_pipe`
+  - Index privileges
+    - Indices
+      - `isoxya-*`
+    - Privileges
+      - `index`
+      - `create_index`
+
+- create user `eg-user`
+  - Roles
+    - `isx_pipe`
+
+- set in `ELASTICSEARCH_HOSTS` using HTTP Basic Auth (`eg-user:PASSWORD@`)
+
+### Kibana
+
+- Management
+  - Kibana
+    - Index Patterns
+      - Create Index Pattern
+        - Index Pattern: `isoxya-*`
+        - Time Filter Field: `t_retrieved`
+
+
 ## Blessing
 
 May you find peace, and help others to do likewise.
