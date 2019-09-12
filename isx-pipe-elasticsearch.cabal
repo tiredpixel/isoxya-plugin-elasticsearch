@@ -1,6 +1,6 @@
 cabal-version:          2.4
 name:                   isx-pipe-elasticsearch
-version:                0.0
+version:                1.0
 synopsis:               Isoxya Pipeline Elasticsearch
 license:                BSD-3-Clause
 license-file:           LICENSE
