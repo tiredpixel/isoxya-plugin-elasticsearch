@@ -34,7 +34,7 @@ create dUrl n = do
                 ("data_i", Number $ scientific i 0),
                 ("data_n", Number $ scientific results_n 0)]
         let uBody = encode uJson <> "\n" -- newline to make testing easier
-        let uReq = Net.jsonReq $ Net.makeReq' "POST" reqUrl uBody
+        let uReq = Net.jsonReq $ Net.makeReq "POST" reqUrl uBody
         uRes <- liftIO $ Net.makeRes uReq n
         modifyResponse $ setResponseCode $
             HTTPTS.statusCode $ HTTP.responseStatus uRes
