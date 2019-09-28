@@ -1,6 +1,6 @@
 cabal-version:          2.4
 name:                   isx-pipe-elasticsearch
-version:                1.0
+version:                1.1
 synopsis:               Isoxya Pipeline Elasticsearch
 license:                BSD-3-Clause
 license-file:           LICENSE
@@ -9,7 +9,16 @@ maintainer:             en@pavouk.tech
 build-type:             Simple
 extra-source-files:     README.md
 --------------------------------------------------------------------------------
+common shared-properties
+    default-language:   Haskell2010
+    default-extensions:
+        OverloadedStrings
+    ghc-options:
+        -Wall
+        -ddump-minimal-imports
+--------------------------------------------------------------------------------
 library pvk-com
+    import:             shared-properties
     exposed-modules:
         PVK.Com.API.Aeson
         PVK.Com.API.Req
@@ -27,7 +36,6 @@ library pvk-com
         relude,
         --
         aeson,
-        base64-bytestring,
         http-conduit,
         network-uri,
         snap-core,
@@ -37,13 +45,9 @@ library pvk-com
         vector
     hs-source-dirs:
         lib/pvk-com/src
-    default-language:   Haskell2010
-    default-extensions:
-        OverloadedStrings
-    ghc-options:
-        -Wall
 
 library isx-pipe-elasticsearch-int
+    import:             shared-properties
     exposed-modules:
         ISX.Pipe.Elasticsearch.Route
         ISX.Pipe.Elasticsearch.Zone.Common.Apex
@@ -58,8 +62,6 @@ library isx-pipe-elasticsearch-int
         pvk-com,
         --
         aeson,
-        bytestring,
-        containers,
         cryptonite,
         http-conduit,
         http-types,
@@ -74,13 +76,9 @@ library isx-pipe-elasticsearch-int
         vector
     hs-source-dirs:
         src
-    default-language:   Haskell2010
-    default-extensions:
-        OverloadedStrings
-    ghc-options:
-        -Wall
 --------------------------------------------------------------------------------
 executable isx-pipe-elasticsearch
+    import:             shared-properties
     main-is:            Main.hs
     other-modules:
         Prelude
@@ -95,14 +93,11 @@ executable isx-pipe-elasticsearch
         snap-server
     hs-source-dirs:
         src/ISX/Pipe/Elasticsearch/Bin
-    default-language:   Haskell2010
-    default-extensions:
-        OverloadedStrings
     ghc-options:
-        -Wall
         -threaded
 --------------------------------------------------------------------------------
 library pvk-com-test
+    import:             shared-properties
     exposed-modules:
         PVK.Com.API.Test
     other-modules:
@@ -111,26 +106,21 @@ library pvk-com-test
         base-noprelude                  ==  4.12.*,
         relude,
         --
-        hspec                           ==  2.*,
-        --
         pvk-com,
         --
         aeson,
         base64-bytestring,
         bytestring,
+        hspec                           ==  2.*,
         http-link-header,
         lens,
         lens-aeson,
         snap-core
     hs-source-dirs:
         lib/pvk-com/test
-    default-language:   Haskell2010
-    default-extensions:
-        OverloadedStrings
-    ghc-options:
-        -Wall
 
 test-suite isx-pipe-elasticsearch-test
+    import:             shared-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
@@ -142,24 +132,18 @@ test-suite isx-pipe-elasticsearch-test
         base-noprelude                  ==  4.12.*,
         relude,
         --
-        hlint                           ==  2.1.17,
-        hspec                           ==  2.*,
-        --
         isx-pipe-elasticsearch-int,
         pvk-com,
         pvk-com-test,
         --
         containers,
+        hspec                           ==  2.*,
         network-uri,
         vector
     hs-source-dirs:
         test
     build-tool-depends:
         hspec-discover:hspec-discover   ==  2.*
-    default-language:   Haskell2010
-    default-extensions:
-        OverloadedStrings
     ghc-options:
-        -Wall
         -threaded
 --------------------------------------------------------------------------------

@@ -70,8 +70,6 @@
     License:  MIT
 * clock
     License:  BSD3
-* cmdargs
-    License:  BSD3
 * colour
     License:  MIT
 * comonad
@@ -90,8 +88,6 @@
     License:  BSD3
 * cookie
     License:  MIT
-* cpphs
-    License:  LGPL
 * cprng-aes
     License:  BSD3
 * crypto-api
@@ -138,8 +134,6 @@
     License:  BSD3
 * exceptions
     License:  BSD3
-* extra
-    License:  BSD3
 * fail
     License:  BSD3
 * filepath
@@ -166,20 +160,14 @@
     License:  BSD3
 * haskell-src-exts
     License:  BSD3
-* haskell-src-exts-util
-    License:  BSD3
 * haskell-src-meta
     License:  BSD3
 * heist
-    License:  BSD3
-* hlint
     License:  BSD3
 * hourglass
     License:  BSD3
 * hpc
     License:  BSD3
-* hscolour
-    License:  LGPL
 * hspec
     License:  MIT
 * hspec-core
@@ -220,8 +208,6 @@
     License:  MIT
 * libiserv
     License:  BSD-3-Clause
-* libyaml
-    License:  BSD3
 * lifted-base
     License:  BSD3
 * map-syntax
@@ -246,8 +232,6 @@
     License:  BSD3
 * old-locale
     License:  BSD3
-* old-time
-    License:  BSD3
 * parallel
     License:  BSD3
 * parseargs
@@ -258,8 +242,6 @@
     License:  BSD3
 * pem
     License:  BSD3
-* polyparse
-    License:  LGPL
 * pretty
     License:  BSD3
 * primitive
@@ -276,11 +258,10 @@
     License:  BSD3
 * readable
     License:  BSD3
-* refact
-    License:  BSD3
 * reflection
     License:  BSD3
 * regex-base
+    Synopsis: Common "Text.Regex.*" API for Regex matching
     License:  BSD3
 * regex-posix
     License:  BSD3
@@ -358,10 +339,10 @@
     License:  BSD3
 * transformers-compat
     License:  BSD3
+* type-equality
+    License:  BSD3
 * typed-process
     License:  MIT
-* uniplate
-    License:  BSD3
 * unix
     License:  BSD3
 * unix-compat
@@ -369,6 +350,8 @@
 * unliftio-core
     License:  MIT
 * unordered-containers
+    License:  BSD3
+* utf8-string
     License:  BSD3
 * uuid-types
     License:  BSD3
@@ -393,8 +376,6 @@
 * xhtml
     License:  BSD3
 * xmlhtml
-    License:  BSD3
-* yaml
     License:  BSD3
 * zlib
     License:  BSD3
