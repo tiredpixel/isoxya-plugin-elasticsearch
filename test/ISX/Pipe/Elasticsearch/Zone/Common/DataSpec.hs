@@ -14,17 +14,17 @@ spec =
     describe "/data POST" $ do
         it "ok crawler-html" $ do
             res <- withSrv $ postJSON "/data" pC
-            assertSuccess res
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
                 "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
                 "Accept-Encoding: gzip",
-                "Content-Length: 204",
-                "Content-Length: 204",
+                "Content-Length: 416",
+                "Content-Length: 416",
                 "Content-Type: application/json",
                 "Host: test_echo",
                 "",
-                "{\"data\":{},\"url\":\"http://example.com:80/\",\"data_i\":1,\"t_retrieved\":\"2019-05-01T06:06:48.740524Z\",\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\"},\"data_n\":1}"]
+                "{\"org_pick\":{\"tag\":\"crawler-html\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{},\"url\":\"http://example.com:80/\",\"data_i\":1,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1}"]
+            assertSuccess res
         
         it "ok link-checker" $ do
             let pC' = mergeObject pC $ object [
@@ -32,17 +32,17 @@ spec =
                         ("meta", object [
                             ("status_code", Number 418)])])]
             res <- withSrv $ postJSON "/data" pC'
-            assertSuccess res
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
                 "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
                 "Accept-Encoding: gzip",
-                "Content-Length: 230",
-                "Content-Length: 230",
+                "Content-Length: 442",
+                "Content-Length: 442",
                 "Content-Type: application/json",
                 "Host: test_echo",
                 "",
-                "{\"data\":{\"meta\":{\"status_code\":418}},\"url\":\"http://example.com:80/\",\"data_i\":1,\"t_retrieved\":\"2019-05-01T06:06:48.740524Z\",\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\"},\"data_n\":1}"]
+                "{\"org_pick\":{\"tag\":\"crawler-html\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"meta\":{\"status_code\":418}},\"url\":\"http://example.com:80/\",\"data_i\":1,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1}"]
+            assertSuccess res
         
         it "ok spellchecker" $ do
             let pC' = object [
@@ -74,44 +74,58 @@ spec =
                                         "2"]),
                                     ("word", "Two")]]),
                             ("paragraph", "Paragraph Two.")]]),
+                    ("org_pick", object [
+                        ("href", "/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005"),
+                        ("tag", "crawler-html")]),
+                    ("site", object [
+                        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw"),
+                        ("url", "http://example.com:80")]),
                     ("site_snap", object [
-                        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z")]),
+                        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z"),
+                        ("t_begin", "2019-05-01T06:19:54.48295Z")]),
                     ("url", "http://example.com:80/"),
-                    ("t_retrieved", "2019-05-01T06:06:48.740524Z")]
+                    ("t_retrieval", "2019-05-01T06:06:48.740524Z")]
             res <- withSrv $ postJSON "/data" pC'
-            assertSuccess res
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
                 "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
                 "Host: test_echo",
-                "Content-Length: 321",
+                "Content-Length: 521",
                 "Accept-Encoding: gzip",
-                "Content-Length: 321",
+                "Content-Length: 521",
                 "Content-Type: application/json",
                 "",
-                "{\"data\":{\"status\":\"miss\",\"offset\":1,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"Paragraf\"],\"word\":\"Paragraph\"},\"url\":\"http://example.com:80/\",\"data_i\":1,\"t_retrieved\":\"2019-05-01T06:06:48.740524Z\",\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\"},\"data_n\":3}",
+                "{\"org_pick\":{\"tag\":\"crawler-html\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"status\":\"miss\",\"offset\":1,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"Paragraf\"],\"word\":\"Paragraph\"},\"url\":\"http://example.com:80/\",\"data_i\":1,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3}",
                 "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
                 "Host: test_echo",
-                "Content-Length: 309",
+                "Content-Length: 533",
                 "Accept-Encoding: gzip",
-                "Content-Length: 309",
+                "Content-Length: 533",
                 "Content-Type: application/json",
                 "",
-                "{\"data\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"1\"],\"word\":\"One\"},\"url\":\"http://example.com:80/\",\"data_i\":2,\"t_retrieved\":\"2019-05-01T06:06:48.740524Z\",\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\"},\"data_n\":3}",
+                "{\"org_pick\":{\"tag\":\"crawler-html\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"1\"],\"word\":\"One\"},\"url\":\"http://example.com:80/\",\"data_i\":2,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3}",
                 "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
                 "Host: test_echo",
-                "Content-Length: 309",
+                "Content-Length: 521",
                 "Accept-Encoding: gzip",
-                "Content-Length: 309",
+                "Content-Length: 521",
                 "Content-Type: application/json",
                 "",
-                "{\"data\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph Two.\",\"correct\":false,\"suggestions\":[\"2\"],\"word\":\"Two\"},\"url\":\"http://example.com:80/\",\"data_i\":3,\"t_retrieved\":\"2019-05-01T06:06:48.740524Z\",\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\"},\"data_n\":3}"]
+                "{\"org_pick\":{\"tag\":\"crawler-html\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph Two.\",\"correct\":false,\"suggestions\":[\"2\"],\"word\":\"Two\"},\"url\":\"http://example.com:80/\",\"data_i\":3,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3}"]
+            assertSuccess res
 
 
 pC :: Value
 pC = object [
     ("data", object []),
+    ("org_pick", object [
+        ("href", "/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005"),
+        ("tag", "crawler-html")]),
+    ("site", object [
+        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw"),
+        ("url", "http://example.com:80")]),
     ("site_snap", object [
-        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z")]),
+        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z"),
+        ("t_begin", "2019-05-01T06:19:54.48295Z")]),
     ("url", "http://example.com:80/"),
-    ("t_retrieved", "2019-05-01T06:06:48.740524Z")]
+    ("t_retrieval", "2019-05-01T06:06:48.740524Z")]

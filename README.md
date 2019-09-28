@@ -30,7 +30,7 @@
     - Index Patterns
       - Create Index Pattern
         - Index Pattern: `isoxya-*`
-        - Time Filter Field: `t_retrieved`
+        - Time Filter Field: `t_retrieval`
 
 
 ## Blessing
