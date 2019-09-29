@@ -41,8 +41,7 @@ library pvk-com
         snap-core,
         snap-extras,
         time,
-        unordered-containers,
-        vector
+        unordered-containers
     hs-source-dirs:
         lib/pvk-com/src
 

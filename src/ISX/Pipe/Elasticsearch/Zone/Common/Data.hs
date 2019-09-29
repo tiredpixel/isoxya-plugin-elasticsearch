@@ -44,18 +44,14 @@ create dUrl n = do
 
 
 convDroplet :: R.Droplet -> [R.Droplet]
-convDroplet drpl = if isSpellchecker
-    then [drpl {
+convDroplet drpl = case R.dropletOrgPickTag drpl of
+    "spellchecker" -> [drpl {
         R.dropletData = datum} | datum <- dataSpellchecker]
-    else [drpl]
+    _ -> [drpl]
     where
-        d = R.dropletData drpl
-        -- TODO: replace type detection with explicit pickax type [#952]
-        isSpellchecker = isJust $
-            d ^? nth 0 . key "results" . nth 0 . key "status"
         dataSpellchecker = [mergeObject result $ object [
                 ("paragraph", String $ datum ^. key "paragraph" . _String)] |
-            datum  <- V.toList $ d ^. _Array,
+            datum  <- V.toList $ R.dropletData drpl ^. _Array,
             result <- V.toList $ datum ^. key "results" . _Array]
 
 dEndpoint :: URI.URI -> R.Droplet -> Maybe URI.URI
