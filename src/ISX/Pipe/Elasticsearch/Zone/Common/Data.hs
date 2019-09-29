@@ -46,15 +46,17 @@ create dUrl n = do
 
 
 convDroplet :: R.Droplet -> [R.Droplet]
-convDroplet drpl = case R.dropletOrgPickTag drpl of
-    "spellchecker" -> [drpl {
-        R.dropletData = datum} | datum <- dataSpellchecker]
-    _ -> [drpl]
+convDroplet drpl = if null r then rDef else r
     where
         dataSpellchecker = [mergeObject result $ object [
                 ("paragraph", String $ datum ^. key "paragraph" . _String)] |
             datum  <- V.toList $ R.dropletData drpl ^. _Array,
             result <- V.toList $ datum ^. key "results" . _Array]
+        r = case R.dropletOrgPickTag drpl of
+            "spellchecker" -> [drpl {
+                R.dropletData = datum} | datum <- dataSpellchecker]
+            _ -> rDef
+        rDef = [drpl]
 
 dId :: R.Droplet -> Integer -> Text
 dId drpl i = show _idh <> "." <> show i

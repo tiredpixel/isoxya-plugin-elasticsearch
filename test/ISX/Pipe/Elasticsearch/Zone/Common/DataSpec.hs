@@ -97,6 +97,25 @@ spec =
                 "{\"org_pick\":{\"tag\":\"spellchecker\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"1\"],\"word\":\"One\"},\"url\":\"http://example.com:80/\",\"data_i\":2,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3}",
                 "{\"index\":{\"_id\":\"a3e2d1be3aed1f3c5b47f3a901cd67c90abeb7b81ecfede42d7a9ffbdc1e42c5.3\",\"_index\":\"isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z\"}}",
                 "{\"org_pick\":{\"tag\":\"spellchecker\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph Two.\",\"correct\":false,\"suggestions\":[\"2\"],\"word\":\"Two\"},\"url\":\"http://example.com:80/\",\"data_i\":3,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3}"]
+        
+        it "ok spellchecker empty-data" $ do
+            let pC' = mergeObject pC $ object [
+                    ("data", Array V.empty),
+                    ("org_pick", object [
+                        ("tag", "spellchecker")])]
+            res <- withSrv $ postJSON "/data" pC'
+            assertSuccess res
+            b <- getResponseBody res
+            (lines . decodeUtf8) b `shouldMatchList` [
+                "POST /_bulk HTTP/1.1",
+                "Host: test_echo",
+                "Content-Length: 613",
+                "Accept-Encoding: gzip",
+                "Content-Length: 613",
+                "Content-Type: application/x-ndjson",
+                "",
+                "{\"index\":{\"_id\":\"a3e2d1be3aed1f3c5b47f3a901cd67c90abeb7b81ecfede42d7a9ffbdc1e42c5.1\",\"_index\":\"isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z\"}}",
+                "{\"org_pick\":{\"tag\":\"spellchecker\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":[],\"url\":\"http://example.com:80/\",\"data_i\":1,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1}"]
 
 
 pC :: Value
