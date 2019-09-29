@@ -61,6 +61,7 @@ library isx-pipe-elasticsearch-int
         pvk-com,
         --
         aeson,
+        bytestring,
         cryptonite,
         http-conduit,
         http-types,
