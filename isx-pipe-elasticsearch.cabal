@@ -21,6 +21,7 @@ library pvk-com
     import:             shared-properties
     exposed-modules:
         PVK.Com.API.Aeson
+        PVK.Com.API.Ext.URI
         PVK.Com.API.Req
         PVK.Com.API.Res
         PVK.Com.API.Resource.CommonError
@@ -29,7 +30,6 @@ library pvk-com
         PVK.Com.API.Zone.Common.Error
         PVK.Com.Net
     other-modules:
-        PVK.Com.API.Ext.URI
         Prelude
     build-depends:
         base-noprelude                  ==  4.12.*,

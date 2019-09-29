@@ -17,7 +17,7 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
-                "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
+                "PUT /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/a3e2d1be3aed1f3c5b47f3a901cd67c90abeb7b81ecfede42d7a9ffbdc1e42c5.1 HTTP/1.1",
                 "Host: test_echo",
                 "Content-Length: 416",
                 "Accept-Encoding: gzip",
@@ -37,7 +37,7 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
-                "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
+                "PUT /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/a3e2d1be3aed1f3c5b47f3a901cd67c90abeb7b81ecfede42d7a9ffbdc1e42c5.1 HTTP/1.1",
                 "Host: test_echo",
                 "Content-Length: 442",
                 "Accept-Encoding: gzip",
@@ -82,7 +82,7 @@ spec =
             assertSuccess res
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
-                "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
+                "PUT /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/a3e2d1be3aed1f3c5b47f3a901cd67c90abeb7b81ecfede42d7a9ffbdc1e42c5.1 HTTP/1.1",
                 "Host: test_echo",
                 "Content-Length: 521",
                 "Accept-Encoding: gzip",
@@ -90,7 +90,7 @@ spec =
                 "Content-Type: application/json",
                 "",
                 "{\"org_pick\":{\"tag\":\"spellchecker\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"status\":\"miss\",\"offset\":1,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"Paragraf\"],\"word\":\"Paragraph\"},\"url\":\"http://example.com:80/\",\"data_i\":1,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3}",
-                "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
+                "PUT /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/a3e2d1be3aed1f3c5b47f3a901cd67c90abeb7b81ecfede42d7a9ffbdc1e42c5.2 HTTP/1.1",
                 "Host: test_echo",
                 "Content-Length: 533",
                 "Accept-Encoding: gzip",
@@ -98,7 +98,7 @@ spec =
                 "Content-Type: application/json",
                 "",
                 "{\"org_pick\":{\"tag\":\"spellchecker\",\"href\":\"/org_pick/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"1\"],\"word\":\"One\"},\"url\":\"http://example.com:80/\",\"data_i\":2,\"site_snap\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/site_snap/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3}",
-                "POST /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/ HTTP/1.1",
+                "PUT /isoxya-6c72f7c0d97098a1f5e0637265894f8061fdaa2fc0b1cb68f232cb099a781ae7-2019-05-01t06-19-54.48295z/_doc/a3e2d1be3aed1f3c5b47f3a901cd67c90abeb7b81ecfede42d7a9ffbdc1e42c5.3 HTTP/1.1",
                 "Host: test_echo",
                 "Content-Length: 521",
                 "Accept-Encoding: gzip",
