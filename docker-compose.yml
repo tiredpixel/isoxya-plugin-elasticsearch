@@ -4,6 +4,7 @@ services:
     env_file: .env
     build: .
     volumes:
+      - ./dist:/home/x/src/dist
       - ./isx-pipe-elasticsearch.cabal:/home/x/src/isx-pipe-elasticsearch.cabal
       - ./lib:/home/x/src/lib
       - ./src:/home/x/src/src
