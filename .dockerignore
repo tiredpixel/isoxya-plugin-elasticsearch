@@ -1,6 +1,6 @@
 *.yml
 .*/
-!.hlint.yaml
+Dockerfile
 README.md
 bin/
 dist/

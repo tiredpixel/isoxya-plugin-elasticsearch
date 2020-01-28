@@ -351,8 +351,6 @@
     License:  MIT
 * unordered-containers
     License:  BSD3
-* utf8-string
-    License:  BSD3
 * uuid-types
     License:  BSD3
 * vector

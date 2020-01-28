@@ -10,6 +10,7 @@ import              Data.Scientific                         (scientific)
 import              PVK.Com.API.Aeson
 import              PVK.Com.API.Resource.ISXPipeSnap        ()
 import              Snap.Core
+import              System.Environment                      (lookupEnv)
 import qualified    Crypto.Hash                             as  Hash
 import qualified    Data.ByteString.Lazy.Char8              as  C8
 import qualified    Data.Text                               as  T
@@ -28,7 +29,9 @@ create :: URI.URI -> Net.Conn -> Snap ()
 create dUrl n = do
     let Just dPath = URI.parseRelativeReference "/_bulk"
     let reqUrl = URI.relativeTo dPath dUrl
-    req_      <- Req.getBoundedJSON' s >>= Req.validateJSON
+    reqLim_ <- liftIO $ join <$> (fmap . fmap) readMaybe (lookupEnv "REQ_LIM")
+    let reqLim = fromMaybe reqLimDef reqLim_
+    req_      <- Req.getBoundedJSON' reqLim >>= Req.validateJSON
     Just drpl <- Res.runValidate req_
     let drpls' = convDroplet drpl
     let results_n = toInteger $ length drpls'
@@ -41,8 +44,6 @@ create dUrl n = do
     modifyResponse $ setResponseCode $
         HTTPTS.statusCode $ HTTP.responseStatus uRes
     writeLBS $ HTTP.responseBody uRes
-    where
-        s = 50000000 -- 50 MB
 
 
 convDroplet :: R.Droplet -> [R.Droplet]
@@ -88,6 +89,9 @@ jDataMeta :: Integer -> Integer -> Value
 jDataMeta i n = object [
     ("data_i", Number $ scientific i 0),
     ("data_n", Number $ scientific n 0)]
+
+reqLimDef :: Int64
+reqLimDef = 2097152 -- 2 MB = (1 + .5) * (4/3) MB
 
 unSiteSnapHref :: Text -> Maybe (Text, Text)
 unSiteSnapHref h = do

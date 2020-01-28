@@ -6,9 +6,6 @@ import              Prelude                                 hiding  (get)
 import qualified    Data.Vector                             as  V
 
 
-{-# ANN module ("HLint: ignore Reduce duplication" :: String) #-}
-
-
 spec :: Spec
 spec =
     describe "/data POST" $ do

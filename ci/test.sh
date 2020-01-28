@@ -10,5 +10,7 @@ readarray -t hsrc < <(
         ! -path './lib/snap-extras' \
         -type d -print
 )
-hlint "${hsrc[@]}"
+hlint \
+    -i 'Reduce duplication' \
+    "${hsrc[@]}"
 cabal v1-test --show-details=direct

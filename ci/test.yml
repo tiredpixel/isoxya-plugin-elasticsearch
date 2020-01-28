@@ -2,7 +2,6 @@ platform: linux
 inputs:
   - name: src
 params:
-  VERSION: 0.0.0
   _TEST_ELASTICSEARCH_HOSTS:
 run:
   user: root

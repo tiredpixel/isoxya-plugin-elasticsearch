@@ -1,6 +1,6 @@
 cabal-version:          2.4
 name:                   isx-pipe-elasticsearch
-version:                1.1
+version:                1.2
 synopsis:               Isoxya Pipeline Elasticsearch
 license:                BSD-3-Clause
 license-file:           LICENSE
@@ -10,6 +10,11 @@ build-type:             Simple
 extra-source-files:     README.md
 --------------------------------------------------------------------------------
 common shared-properties
+    build-depends:
+        base-noprelude                  ==  4.12.*,
+        relude
+    mixins:
+        relude                          (Relude as Prelude)
     default-language:   Haskell2010
     default-extensions:
         OverloadedStrings
@@ -29,12 +34,7 @@ library pvk-com
         PVK.Com.API.Resource.ISXPipeSnap
         PVK.Com.API.Zone.Common.Error
         PVK.Com.Net
-    other-modules:
-        Prelude
     build-depends:
-        base-noprelude                  ==  4.12.*,
-        relude,
-        --
         aeson,
         http-conduit,
         network-uri,
@@ -53,11 +53,7 @@ library isx-pipe-elasticsearch-int
         ISX.Pipe.Elasticsearch.Zone.Common.Data
     other-modules:
         ISX.Pipe.Elasticsearch.Resource.Common
-        Prelude
     build-depends:
-        base-noprelude                  ==  4.12.*,
-        relude,
-        --
         pvk-com,
         --
         aeson,
@@ -80,12 +76,7 @@ library isx-pipe-elasticsearch-int
 executable isx-pipe-elasticsearch
     import:             shared-properties
     main-is:            Main.hs
-    other-modules:
-        Prelude
     build-depends:
-        base-noprelude                  ==  4.12.*,
-        relude,
-        --
         pvk-com,
         isx-pipe-elasticsearch-int,
         --
@@ -100,22 +91,21 @@ library pvk-com-test
     import:             shared-properties
     exposed-modules:
         PVK.Com.API.Test
-    other-modules:
-        Prelude
     build-depends:
-        base-noprelude                  ==  4.12.*,
-        relude,
-        --
         pvk-com,
         --
         aeson,
         base64-bytestring,
         bytestring,
+        directory,
+        filepath,
         hspec                           ==  2.*,
         http-link-header,
         lens,
         lens-aeson,
         snap-core
+    mixins:
+        relude                          (Relude.Unsafe)
     hs-source-dirs:
         lib/pvk-com/test
 
@@ -127,11 +117,7 @@ test-suite isx-pipe-elasticsearch-test
         ISX.Pipe.Elasticsearch.Zone.Common.ApexSpec
         ISX.Pipe.Elasticsearch.Zone.Common.DataSpec
         ISX.Test
-        Prelude
     build-depends:
-        base-noprelude                  ==  4.12.*,
-        relude,
-        --
         isx-pipe-elasticsearch-int,
         pvk-com,
         pvk-com-test,

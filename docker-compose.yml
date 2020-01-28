@@ -17,12 +17,12 @@ services:
       test: {}
   web:
     env_file: .env
-    image: kibana:7.4.0
+    image: kibana:7.5.2
     networks:
       - web
       - db
   db:
-    image: elasticsearch:7.4.0
+    image: elasticsearch:7.5.2
     environment:
       discovery.type: single-node
     volumes:
