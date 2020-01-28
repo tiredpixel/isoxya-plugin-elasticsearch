@@ -12,7 +12,7 @@
 - create role `isx_pipe`
   - Index privileges
     - Indices
-      - `isoxya-*`
+      - `isoxya.*`
     - Privileges
       - `index`
       - `create_index`
@@ -29,7 +29,7 @@
   - Kibana
     - Index Patterns
       - Create Index Pattern
-        - Index Pattern: `isoxya-*`
+        - Index Pattern: `isoxya.*`
         - Time Filter Field: `t_retrieval`
 
 

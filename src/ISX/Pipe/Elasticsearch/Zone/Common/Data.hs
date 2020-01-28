@@ -7,6 +7,7 @@ import              Control.Lens
 import              Data.Aeson
 import              Data.Aeson.Lens
 import              Data.Scientific                         (scientific)
+import              Data.Time.Clock                         (UTCTime)
 import              PVK.Com.API.Aeson
 import              PVK.Com.API.Resource.ISXPipeSnap        ()
 import              Snap.Core
@@ -14,6 +15,7 @@ import              System.Environment                      (lookupEnv)
 import qualified    Crypto.Hash                             as  Hash
 import qualified    Data.ByteString.Lazy.Char8              as  C8
 import qualified    Data.Text                               as  T
+import qualified    Data.Time.Format                        as  Time
 import qualified    Data.Vector                             as  V
 import qualified    Network.HTTP.Conduit                    as  HTTP
 import qualified    Network.HTTP.Types.Status               as  HTTPTS
@@ -67,12 +69,15 @@ dId drpl i = show _idh <> "." <> show i
 
 dIndex :: R.Droplet -> Maybe Text
 dIndex drpl = do
-    (site, snap) <- unSiteSnapHref $ R.dropletSiteSnapHref drpl
-    let site' = show $ hash site
-    let snap' = T.toLower $ T.replace ":" "-" snap
-    return $ _index_pre <> site' <> "-" <> snap'
+    org <- unOrgHref $ R.dropletOrgHref drpl
+    let time = R.dropletSiteSnapTBegin drpl
+    return $ _ns <> _sep <> org <> _sep <> formatTime time
     where
-        _index_pre = "isoxya-" :: Text
+        _sep = "."
+        _ns = "isoxya" :: Text
+
+formatTime :: UTCTime -> Text
+formatTime = toText . Time.formatTime Time.defaultTimeLocale "%F"
 
 hash :: Text -> Hash.Digest Hash.SHA256
 hash t = Hash.hash (encodeUtf8 t :: ByteString)
@@ -93,7 +98,7 @@ jDataMeta i n = object [
 reqLimDef :: Int64
 reqLimDef = 2097152 -- 2 MB = (1 + .5) * (4/3) MB
 
-unSiteSnapHref :: Text -> Maybe (Text, Text)
-unSiteSnapHref h = do
-    ["", "site", s, "site_snap", n] <- return $ T.splitOn "/" h
-    return (s, n)
+unOrgHref :: Text -> Maybe Text
+unOrgHref h = do
+    ["", "org", o] <- return $ T.splitOn "/" h
+    return o
