@@ -15,7 +15,7 @@ spec =
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
                 "POST /_bulk HTTP/1.1",
-                "Host: test_echo",
+                "Host: 10.88.0.1:43044",
                 "Content-Length: 628",
                 "Accept-Encoding: gzip",
                 "Content-Length: 628",
@@ -36,7 +36,7 @@ spec =
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
                 "POST /_bulk HTTP/1.1",
-                "Host: test_echo",
+                "Host: 10.88.0.1:43044",
                 "Content-Length: 654",
                 "Accept-Encoding: gzip",
                 "Content-Length: 654",
@@ -82,7 +82,7 @@ spec =
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
                 "POST /_bulk HTTP/1.1",
-                "Host: test_echo",
+                "Host: 10.88.0.1:43044",
                 "Content-Length: 2211",
                 "Accept-Encoding: gzip",
                 "Content-Length: 2211",
@@ -105,7 +105,7 @@ spec =
             b <- getResponseBody res
             (lines . decodeUtf8) b `shouldMatchList` [
                 "POST /_bulk HTTP/1.1",
-                "Host: test_echo",
+                "Host: 10.88.0.1:43044",
                 "Content-Length: 628",
                 "Accept-Encoding: gzip",
                 "Content-Length: 628",
