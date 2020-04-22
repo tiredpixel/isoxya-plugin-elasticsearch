@@ -1,5 +1,6 @@
 platform: linux
 inputs:
+  - name: meta
   - name: src
 outputs:
   - name: pkg

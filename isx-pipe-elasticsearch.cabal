@@ -125,6 +125,7 @@ test-suite isx-pipe-elasticsearch-test
         containers,
         hspec                           ==  2.*,
         network-uri,
+        text,
         vector
     hs-source-dirs:
         test
