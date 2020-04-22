@@ -21,13 +21,13 @@ USER ${USER}
 
 WORKDIR ${HOME}
 
-ENV \
-    PATH=${HOME}/bin:$PATH
+ENV ADDRESS=localhost \
+    PATH=${HOME}/bin:$PATH \
+    PORT=8000
 
-CMD ["isx-pipe-elasticsearch", \
-    "-p", "8000"]
+CMD isx-pipe-elasticsearch -b ${ADDRESS} -p ${PORT}
 
-EXPOSE 8000
+EXPOSE ${PORT}
 
-HEALTHCHECK CMD curl -fs http://localhost:8000 || false
+HEALTHCHECK CMD curl -fs http://${ADDRESS}:${PORT} || false
 #===============================================================================

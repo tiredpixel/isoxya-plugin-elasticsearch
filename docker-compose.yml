@@ -10,16 +10,16 @@ services:
       - ./src:/home/x/src/src
       - ./test:/home/x/src/test
     networks:
-      pipe:
+      plugin:
         aliases:
-          - elasticsearch.pipe.proc.isoxya.pavouk.tech
+          - elasticsearch.plugins.isoxya-stag.pavouk.tech
       test: {}
   test_echo:
     image: keisato/http-echo
     networks:
       - test
 networks:
-  pipe:
+  plugin:
     external: true
-    name: isx_pipe
+    name: isx_plugin
   test: {}
