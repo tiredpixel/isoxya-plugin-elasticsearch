@@ -15,7 +15,7 @@ services:
           - elasticsearch.plugins.isoxya-stag.pavouk.tech
       test: {}
   test_echo:
-    image: keisato/http-echo
+    image: docker.io/keisato/http-echo:latest
     networks:
       - test
 networks:
