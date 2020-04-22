@@ -14,10 +14,24 @@ services:
         aliases:
           - elasticsearch.plugins.isoxya-stag.pavouk.tech
       test: {}
+  elasticsearch:
+    image: docker.io/library/elasticsearch:7.6.2
+    environment:
+      discovery.type: single-node
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+    networks:
+      - plugin
+  kibana:
+    image: docker.io/library/kibana:7.6.2
+    networks:
+      - plugin
   test_echo:
     image: docker.io/keisato/http-echo:latest
     networks:
       - test
+volumes:
+  elasticsearch: {}
 networks:
   plugin:
     external: true
