@@ -15,11 +15,11 @@
       - `index`
       - `create_index`
 
-- create user `eg-user`
+- create user `eg_user`
   - Roles
-    - `isoxya_stag`
+    - `isx_plugin_elasticsearch`
 
-- set in `ELASTICSEARCH_HOSTS` using HTTP Basic Auth (`eg-user:PASSWORD@`)
+- set in `ELASTICSEARCH_HOSTS` using HTTP Basic Auth (`eg_user:PASSWORD@`)
 
 ### Kibana
 
