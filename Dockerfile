@@ -1,6 +1,6 @@
 #===============================================================================
-# FROMFREEZE haskell:8.6.5
-FROM haskell@sha256:c56bb7769a1404431629dfe3d9a99e7a57f8550cf4b1e4c5057ecb71453c67c1
+# FROMFREEZE docker.io/library/haskell:8.8.3
+FROM docker.io/library/haskell@sha256:7c8ff5c85fb0ad9ab1c63f578c31a52e5b9ce01d62e669702fba8dee2fa5cd30
 
 ARG USER=x
 ARG HOME=/home/x
@@ -9,7 +9,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         curl \
         daemontools \
-        ghc-8.6.5-prof \
+        ghc-8.8.3-prof \
         happy \
         hlint \
         jq \
@@ -40,7 +40,7 @@ COPY . .
 ENV ADDRESS=localhost \
     PORT=8000
 
-CMD cabal v1-run isx-pipe-elasticsearch -- -b ${ADDRESS} -p ${PORT}
+CMD cabal v1-run isx-plugin-elasticsearch -- -b ${ADDRESS} -p ${PORT}
 
 EXPOSE ${PORT}
 

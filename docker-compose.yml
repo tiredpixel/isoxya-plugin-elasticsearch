@@ -1,11 +1,11 @@
 version: "2.4"
 services:
-  pipe_elasticsearch:
+  plugin_elasticsearch:
     env_file: .env
     build: .
     volumes:
       - ./dist:/home/x/src/dist
-      - ./isx-pipe-elasticsearch.cabal:/home/x/src/isx-pipe-elasticsearch.cabal
+      - ./isx-plugin-elasticsearch.cabal:/home/x/src/isx-plugin-elasticsearch.cabal
       - ./lib:/home/x/src/lib
       - ./src:/home/x/src/src
       - ./test:/home/x/src/test

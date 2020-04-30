@@ -1,6 +1,6 @@
 #===============================================================================
-# FROMFREEZE debian:9
-FROM debian@sha256:85c4668abb4f26e913152ba8fd04fca5f1c2345d3e2653855e6bb0acf461ed50
+# FROMFREEZE docker.io/library/debian:9
+FROM docker.io/library/debian@sha256:666ffd4fbcdff07edcbd65f0ec1dc86ed294f5e3be93eb26280575f77427df46
 
 ARG USER=x
 ARG HOME=/home/x
@@ -26,7 +26,7 @@ ENV ADDRESS=localhost \
     PATH=${HOME}/bin:$PATH \
     PORT=8000
 
-CMD isx-pipe-elasticsearch -b ${ADDRESS} -p ${PORT}
+CMD isx-plugin-elasticsearch -b ${ADDRESS} -p ${PORT}
 
 EXPOSE ${PORT}
 

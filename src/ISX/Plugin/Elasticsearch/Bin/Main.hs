@@ -1,7 +1,7 @@
 module Main (main) where
 
 
-import              ISX.Pipe.Elasticsearch.Route
+import              ISX.Plugin.Elasticsearch.Route
 import              Network.URI
 import              System.Environment                      (getEnv)
 import qualified    PVK.Com.API.Zone.Common.Error           as  ZE

@@ -30,6 +30,8 @@
     License:  BSD-3-Clause
 * base-compat
     License:  MIT
+* base-compat-batteries
+    License:  MIT
 * base-noprelude
     License:  BSD-3-Clause
 * base-orphans

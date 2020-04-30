@@ -1,4 +1,4 @@
-module ISX.Pipe.Elasticsearch.Resource.Common (
+module ISX.Plugin.Elasticsearch.Resource.Common (
     Apex(..)
     ) where
 

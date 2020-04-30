@@ -7,7 +7,7 @@
 
 ### Auth
 
-- create role `isx_pipe`
+- create role `isx_plugin_elasticsearch`
   - Index privileges
     - Indices
       - `isoxya.*`
@@ -17,7 +17,7 @@
 
 - create user `eg-user`
   - Roles
-    - `isx_pipe`
+    - `isoxya_stag`
 
 - set in `ELASTICSEARCH_HOSTS` using HTTP Basic Auth (`eg-user:PASSWORD@`)
 

@@ -1,4 +1,4 @@
-module ISX.Pipe.Elasticsearch.Zone.Common.Data (
+module ISX.Plugin.Elasticsearch.Zone.Common.Data (
     create
     ) where
 

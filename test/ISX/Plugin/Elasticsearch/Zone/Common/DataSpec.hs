@@ -1,4 +1,4 @@
-module ISX.Pipe.Elasticsearch.Zone.Common.DataSpec (spec) where
+module ISX.Plugin.Elasticsearch.Zone.Common.DataSpec (spec) where
 
 
 import              ISX.Test

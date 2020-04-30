@@ -1,7 +1,7 @@
-cabal-version:          2.4
-name:                   isx-pipe-elasticsearch
+cabal-version:          3.0
+name:                   isx-plugin-elasticsearch
 version:                1.2
-synopsis:               Isoxya Pipeline Elasticsearch
+synopsis:               Isoxya Plugin Elasticsearch
 license:                BSD-3-Clause
 license-file:           LICENSE
 author:                 Pavouk OÜ
@@ -11,7 +11,7 @@ extra-source-files:     README.md
 --------------------------------------------------------------------------------
 common shared-properties
     build-depends:
-        base-noprelude                  ==  4.12.*,
+        base-noprelude                  ==  4.13.*,
         relude
     mixins:
         relude                          (Relude as Prelude)
@@ -45,14 +45,14 @@ library common
     hs-source-dirs:
         lib/common/src
 
-library isx-pipe-elasticsearch-int
+library isx-plugin-elasticsearch-int
     import:             shared-properties
     exposed-modules:
-        ISX.Pipe.Elasticsearch.Route
-        ISX.Pipe.Elasticsearch.Zone.Common.Apex
-        ISX.Pipe.Elasticsearch.Zone.Common.Data
+        ISX.Plugin.Elasticsearch.Route
+        ISX.Plugin.Elasticsearch.Zone.Common.Apex
+        ISX.Plugin.Elasticsearch.Zone.Common.Data
     other-modules:
-        ISX.Pipe.Elasticsearch.Resource.Common
+        ISX.Plugin.Elasticsearch.Resource.Common
     build-depends:
         common,
         --
@@ -73,17 +73,17 @@ library isx-pipe-elasticsearch-int
     hs-source-dirs:
         src
 --------------------------------------------------------------------------------
-executable isx-pipe-elasticsearch
+executable isx-plugin-elasticsearch
     import:             shared-properties
     main-is:            Main.hs
     build-depends:
         common,
-        isx-pipe-elasticsearch-int,
+        isx-plugin-elasticsearch-int,
         --
         network-uri,
         snap-server
     hs-source-dirs:
-        src/ISX/Pipe/Elasticsearch/Bin
+        src/ISX/Plugin/Elasticsearch/Bin
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
@@ -109,16 +109,16 @@ library common-test
     hs-source-dirs:
         lib/common/test
 
-test-suite isx-pipe-elasticsearch-test
+test-suite isx-plugin-elasticsearch-test
     import:             shared-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
-        ISX.Pipe.Elasticsearch.Zone.Common.ApexSpec
-        ISX.Pipe.Elasticsearch.Zone.Common.DataSpec
+        ISX.Plugin.Elasticsearch.Zone.Common.ApexSpec
+        ISX.Plugin.Elasticsearch.Zone.Common.DataSpec
         ISX.Test
     build-depends:
-        isx-pipe-elasticsearch-int,
+        isx-plugin-elasticsearch-int,
         common,
         common-test,
         --
