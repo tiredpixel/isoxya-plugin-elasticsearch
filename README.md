@@ -1,8 +1,6 @@
-# Isoxya plugin: Elasticsearch (Haskell)
+# Isoxya plugin: Elasticsearch
 
-[Isoxya plugin: Elasticsearch](https://github.com/pavouk-0/isoxya-plugin-elasticsearch-hs) is an Isoxya plugin streaming data to an Elasticsearch cluster. Using this in combination with the proprietary Isoxya engine, it's possible to crawl entire websites efficiently, even if they have millions of pages, and process them in myriad ways, depending on which plugins it's combined with, querying them using all the normal features provided by Elasticsearch, and visually using Kibana.
-
-[Isoxya](https://www.pavouk.tech/isoxya/) is a web crawler & data processing system. It is designed as a next-generation web crawler, scalable for large sites (millions of pages), cost-effective for tiny sites (1+ pages), offering flexible data processing using multi-industry plugins, delivering results via data streaming to multiple storage backends. It is magicked via a REST API using JSON.
+[Isoxya plugin: Elasticsearch](https://github.com/pavouk-0/isoxya-plugin-elasticsearch) is a plugin for [Isoxya](https://www.pavouk.tech/isoxya/)—Web Crawler & Data Processing System. Using this in combination with the proprietary crawling engine by [Pavouk](https://www.pavouk.tech/), it's possible to stream data to an [Elasticsearch](https://www.elastic.co/elasticsearch/) cluster, querying it using all the normal features provided by Elasticsearch and [Kibana](https://www.elastic.co/kibana).
 
 
 ## Setup (Elastic Stack)
@@ -39,8 +37,6 @@ May you find peace, and help others to do likewise.
 
 
 ## Contact
-
-We've tried to make this document clear and accessible. If you have any feedback about how we could improve it, or if there's any part of it you'd like to discuss or clarify, we'd love to hear from you. Our contact details are:
 
 Pavouk OÜ | [https://www.pavouk.tech/](https://www.pavouk.tech/) | [en@pavouk.tech](mailto:en@pavouk.tech)
 
