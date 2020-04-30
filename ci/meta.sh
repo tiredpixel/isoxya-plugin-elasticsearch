@@ -1,1 +1,1 @@
-../lib/pvk-com/ci/meta.sh
+../lib/common/ci/meta.sh

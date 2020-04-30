@@ -22,7 +22,7 @@ common shared-properties
         -Wall
         -ddump-minimal-imports
 --------------------------------------------------------------------------------
-library pvk-com
+library common
     import:             shared-properties
     exposed-modules:
         PVK.Com.API.Aeson
@@ -43,7 +43,7 @@ library pvk-com
         time,
         unordered-containers
     hs-source-dirs:
-        lib/pvk-com/src
+        lib/common/src
 
 library isx-pipe-elasticsearch-int
     import:             shared-properties
@@ -54,7 +54,7 @@ library isx-pipe-elasticsearch-int
     other-modules:
         ISX.Pipe.Elasticsearch.Resource.Common
     build-depends:
-        pvk-com,
+        common,
         --
         aeson,
         bytestring,
@@ -77,7 +77,7 @@ executable isx-pipe-elasticsearch
     import:             shared-properties
     main-is:            Main.hs
     build-depends:
-        pvk-com,
+        common,
         isx-pipe-elasticsearch-int,
         --
         network-uri,
@@ -87,12 +87,12 @@ executable isx-pipe-elasticsearch
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
-library pvk-com-test
+library common-test
     import:             shared-properties
     exposed-modules:
         PVK.Com.API.Test
     build-depends:
-        pvk-com,
+        common,
         --
         aeson,
         base64-bytestring,
@@ -107,7 +107,7 @@ library pvk-com-test
     mixins:
         relude                          (Relude.Unsafe)
     hs-source-dirs:
-        lib/pvk-com/test
+        lib/common/test
 
 test-suite isx-pipe-elasticsearch-test
     import:             shared-properties
@@ -119,8 +119,8 @@ test-suite isx-pipe-elasticsearch-test
         ISX.Test
     build-depends:
         isx-pipe-elasticsearch-int,
-        pvk-com,
-        pvk-com-test,
+        common,
+        common-test,
         --
         containers,
         hspec                           ==  2.*,
