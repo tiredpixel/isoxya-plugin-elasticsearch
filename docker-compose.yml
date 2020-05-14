@@ -15,15 +15,24 @@ services:
           - elasticsearch.plugins.isoxya-stag.pavouk.tech
       test: {}
   elasticsearch:
-    image: docker.io/library/elasticsearch:7.6.2
+    env_file: .env
+    image: docker.io/library/elasticsearch:7.7.0
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-security.html
     environment:
       discovery.type: single-node
+      xpack.security.enabled: "true"
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
     networks:
       - plugin
   kibana:
-    image: docker.io/library/kibana:7.6.2
+    env_file: .env
+    image: docker.io/library/kibana:7.7.0
+    # https://www.elastic.co/guide/en/kibana/current/using-kibana-with-security.html
+    environment:
+      SERVER_HOST: 0.0.0.0
+      ELASTICSEARCH_USERNAME: kibana
+      XPACK_SECURITY_ENABLED: "true"
     networks:
       - plugin
   test_echo:
