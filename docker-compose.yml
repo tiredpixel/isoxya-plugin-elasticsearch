@@ -44,5 +44,5 @@ volumes:
 networks:
   plugin:
     external: true
-    name: isx_plugin
+    name: isoxya_plugin
   test: {}
