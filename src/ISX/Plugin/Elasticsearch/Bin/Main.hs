@@ -11,7 +11,7 @@ import qualified    Snap.Http.Server                        as  Srv
 
 main :: IO ()
 main = do
-    Just dUrl <- parseAbsoluteURI <$> getEnv "ELASTICSEARCH_HOSTS"
+    Just dUrl <- parseAbsoluteURI <$> getEnv "ELASTICSEARCH_HOST"
     n <- Net.openConn
     cEmp <- Srv.commandLineConfig Srv.emptyConfig
     Srv.httpServe (conf cEmp) $ site dUrl n

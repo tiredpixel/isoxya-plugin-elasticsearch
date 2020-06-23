@@ -13,6 +13,6 @@ import qualified    PVK.Com.Net                             as  Net
 
 withSrv :: RequestBuilder IO () -> IO Response
 withSrv r = do
-    Just dUrl <- parseAbsoluteURI <$> getEnv "_TEST_ELASTICSEARCH_HOSTS"
+    Just dUrl <- parseAbsoluteURI <$> getEnv "_TEST_ELASTICSEARCH_HOST"
     n <- Net.openConn
     runHandler r $ site dUrl n

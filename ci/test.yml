@@ -2,7 +2,7 @@ platform: linux
 inputs:
   - name: src
 params:
-  _TEST_ELASTICSEARCH_HOSTS:
+  _TEST_ELASTICSEARCH_HOST:
 run:
   user: root
   path: src/ci/sh
