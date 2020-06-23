@@ -143,7 +143,7 @@
 * free
     License:  BSD3
 * ghc
-    License:  BSD3
+    License:  BSD-3-Clause
 * ghc-boot
     License:  BSD3
 * ghc-boot-th
@@ -358,8 +358,6 @@
 * vector
     License:  BSD3
 * vector-algorithms
-    License:  BSD3
-* vector-th-unbox
     License:  BSD3
 * void
     License:  BSD3

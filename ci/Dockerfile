@@ -1,6 +1,6 @@
 #===============================================================================
 # FROMFREEZE docker.io/library/debian:10
-FROM docker.io/library/debian@sha256:87c8111d19bb221842fd8e48195782c987714f4e8b43b31a6cd5af090fc6b3ee
+FROM docker.io/library/debian@sha256:46d659005ca1151087efa997f1039ae45a7bf7a2cbbe2d17d3dcbda632a3ee9a
 
 ARG USER=x
 ARG HOME=/home/x

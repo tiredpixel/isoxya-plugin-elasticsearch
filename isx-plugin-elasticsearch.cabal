@@ -2,10 +2,10 @@ cabal-version:          3.0
 name:                   isx-plugin-elasticsearch
 version:                1.2
 synopsis:               Isoxya Plugin Elasticsearch
-license:                BSD-3-Clause
+license:                NONE
 license-file:           LICENSE
-author:                 Pavouk OÜ
-maintainer:             en@pavouk.tech
+author:                 tiredpixel
+maintainer:             tiredpixel
 build-type:             Simple
 extra-source-files:     README.md
 --------------------------------------------------------------------------------
