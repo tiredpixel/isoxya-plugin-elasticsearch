@@ -2,19 +2,13 @@ version: "2.4"
 services:
   plugin_elasticsearch:
     env_file: .env
-    build: .
-    volumes:
-      - ./dist:/home/x/src/dist
-      - ./isx-plugin-elasticsearch.cabal:/home/x/src/isx-plugin-elasticsearch.cabal
-      - ./lib:/home/x/src/lib
-      - ./src:/home/x/src/src
-      - ./test:/home/x/src/test
+    image: registry.packages.tiredpixel.com/base/isoxya-plugin-elasticsearch-build:head
     networks:
       plugin:
         aliases:
           - elasticsearch.plugins.dev.isoxya.com
       test: {}
-  elasticsearch:
+  es:
     env_file: .env
     image: docker.io/library/elasticsearch:7.8.0
     # https://www.elastic.co/guide/en/elasticsearch/reference/current/configuring-security.html
@@ -25,7 +19,7 @@ services:
       - elasticsearch:/usr/share/elasticsearch/data
     networks:
       - plugin
-  kibana:
+  kib:
     env_file: .env
     image: docker.io/library/kibana:7.8.0
     # https://www.elastic.co/guide/en/kibana/current/using-kibana-with-security.html
@@ -40,7 +34,7 @@ services:
     networks:
       - test
 volumes:
-  elasticsearch: {}
+  es: {}
 networks:
   plugin:
     external: true

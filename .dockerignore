@@ -6,3 +6,6 @@ bin/
 dist/
 
 !.version
+
+cache/
+image/
