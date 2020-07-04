@@ -32,7 +32,6 @@ library common
         PVK.Com.API.Resource.CommonError
         PVK.Com.API.Resource.ISXPipe
         PVK.Com.API.Resource.ISXPipeSnap
-        PVK.Com.API.Zone.Common.Error
         PVK.Com.Net
     build-depends:
         aeson,
@@ -41,6 +40,7 @@ library common
         snap-core,
         snap-extras,
         time,
+        unix,
         unordered-containers
     hs-source-dirs:
         lib/common/src

@@ -1,8 +1,13 @@
 version: "2.4"
 services:
-  plugin_elasticsearch:
+  plugin:
     env_file: .env
     image: registry.packages.tiredpixel.com/base/isoxya-plugin-elasticsearch-build:head
+    volumes:
+      - ./isx-plugin-elasticsearch.cabal:/home/x/repo/isx-plugin-elasticsearch.cabal
+      - ./lib:/home/x/repo/lib
+      - ./src:/home/x/repo/src
+      - ./test:/home/x/repo/test
     networks:
       plugin:
         aliases:
@@ -16,7 +21,7 @@ services:
       xpack.security.enabled: "true"
     image: docker.io/library/elasticsearch:7.8.0
     volumes:
-      - elasticsearch:/usr/share/elasticsearch/data
+      - es:/usr/share/elasticsearch/data
     networks:
       - plugin
   kib:
