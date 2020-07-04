@@ -22,7 +22,7 @@ USER ${USER}
 
 WORKDIR ${HOME}
 
-ENV ADDRESS=0.0.0.0 \
+ENV ADDRESS=localhost \
     PATH=${HOME}/bin:$PATH \
     PORT=8000
 
