@@ -1,11 +1,12 @@
-*.yml
+# Base
 .*/
 Dockerfile
-README.md
-bin/
-dist/
-
+docker-compose.yml
 !.version
 
+# Concourse CI
 cache/
 image/
+
+# Haskell
+dist/

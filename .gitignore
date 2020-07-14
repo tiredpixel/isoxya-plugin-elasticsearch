@@ -1,2 +1,6 @@
+# Base
 /*.env
 /docker-compose.*.yml
+
+# Haskell
+/dist/
