@@ -40,6 +40,7 @@ library common
         aeson,
         bytestring,
         conduit,
+        conduit-extra,
         http-conduit,
         http-types,
         network-uri,
