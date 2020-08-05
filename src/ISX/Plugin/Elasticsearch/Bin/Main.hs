@@ -4,9 +4,9 @@ module Main (main) where
 import              ISX.Plugin.Elasticsearch.Route
 import              Network.URI
 import              System.Environment                      (getEnv)
-import qualified    PVK.Com.API.Res                         as  Res
-import qualified    PVK.Com.Net                             as  Net
 import qualified    Snap.Http.Server                        as  Srv
+import qualified    TPX.Com.API.Res                         as  Res
+import qualified    TPX.Com.Net                             as  Net
 
 
 main :: IO ()

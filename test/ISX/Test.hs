@@ -1,14 +1,14 @@
 module ISX.Test (
-    module PVK.Com.API.Test,
+    module TPX.Com.API.Test,
     withSrv
     ) where
 
 
 import              ISX.Plugin.Elasticsearch.Route
 import              Network.URI
-import              PVK.Com.API.Test
 import              System.Environment                      (getEnv)
-import qualified    PVK.Com.Net                             as  Net
+import              TPX.Com.API.Test
+import qualified    TPX.Com.Net                             as  Net
 
 
 withSrv :: RequestBuilder IO () -> IO Response

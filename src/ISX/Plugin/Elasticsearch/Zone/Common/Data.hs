@@ -8,10 +8,10 @@ import              Data.Aeson
 import              Data.Aeson.Lens
 import              Data.Scientific                         (scientific)
 import              Data.Time.Clock                         (UTCTime)
-import              PVK.Com.API.Aeson
-import              PVK.Com.API.Resource.ISXPipeSnap        ()
 import              Snap.Core
 import              System.Environment                      (lookupEnv)
+import              TPX.Com.API.Aeson
+import              TPX.Com.API.Resource.ISX.PipeSnap       ()
 import qualified    Crypto.Hash                             as  Hash
 import qualified    Data.ByteString.Lazy.Char8              as  C8
 import qualified    Data.Text                               as  T
@@ -20,11 +20,11 @@ import qualified    Data.Vector                             as  V
 import qualified    Network.HTTP.Conduit                    as  HTTP
 import qualified    Network.HTTP.Types.Status               as  HTTPTS
 import qualified    Network.URI                             as  URI
-import qualified    PVK.Com.API.Ext.URI                     as  URI
-import qualified    PVK.Com.API.Req                         as  Req
-import qualified    PVK.Com.API.Res                         as  Res
-import qualified    PVK.Com.API.Resource.ISXPipe            as  R
-import qualified    PVK.Com.Net                             as  Net
+import qualified    TPX.Com.API.Ext.URI                     as  URI
+import qualified    TPX.Com.API.Req                         as  Req
+import qualified    TPX.Com.API.Res                         as  Res
+import qualified    TPX.Com.API.Resource.ISX.Pipe           as  R
+import qualified    TPX.Com.Net                             as  Net
 
 
 create :: URI.URI -> Net.Conn -> Snap ()
