@@ -32,8 +32,6 @@
     License:  MIT
 * base-compat-batteries
     License:  MIT
-* base-noprelude
-    License:  BSD-3-Clause
 * base-orphans
     License:  MIT
 * base64-bytestring
@@ -264,6 +262,8 @@
     License:  BSD3
 * regex-base
     Synopsis: Common "Text.Regex.*" API for Regex matching
+    License:  BSD3
+* regex-compat
     License:  BSD3
 * regex-posix
     License:  BSD3
