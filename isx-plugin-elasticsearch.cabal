@@ -43,6 +43,7 @@ library common
         http-conduit,
         http-types,
         network-uri,
+        regex-compat,
         resourcet,
         snap-core,
         snap-extras,
