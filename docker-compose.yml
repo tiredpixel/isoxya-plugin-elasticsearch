@@ -4,6 +4,7 @@ services:
     env_file: .env
     image: registry.packages.tiredpixel.com/base/isoxya-plugin-elasticsearch-build:head
     volumes:
+      - ./.version:/home/x/repo/.version
       - ./isx-plugin-elasticsearch.cabal:/home/x/repo/isx-plugin-elasticsearch.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
