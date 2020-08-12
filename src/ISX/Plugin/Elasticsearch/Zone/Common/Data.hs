@@ -64,7 +64,8 @@ convDroplet drpl = if null r then rDef else r
 dId :: R.Droplet -> Integer -> Text
 dId drpl i = show _idh <> "." <> show i
     where
-        _idh = hash (show (URI.unURIAbsolute $ R.dropletUrl drpl) <> "|" <>
+        _idh = hash (R.dropletSiteSnapHref drpl <> "|" <>
+            show (URI.unURIAbsolute $ R.dropletUrl drpl) <> "|" <>
             R.dropletOrgPickHref drpl)
 
 dIndex :: R.Droplet -> Maybe Text
