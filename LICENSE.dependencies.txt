@@ -54,8 +54,6 @@
     License:  BSD3
 * bytestring-builder
     License:  BSD3
-* bytestring-conversion
-    License:  MPL-2.0
 * cabal-doctest
     License:  BSD3
 * call-stack
@@ -125,8 +123,6 @@
 * distributive
     License:  BSD3
 * dlist
-    License:  BSD3
-* double-conversion
     License:  BSD3
 * entropy
     License:  BSD3
