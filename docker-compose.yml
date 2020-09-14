@@ -2,7 +2,7 @@ version: "2.4"
 services:
   plugin:
     env_file: .env
-    image: docker.package.tiredpixel.com/tiredpixel/isoxya-plugin-elasticsearch-build:head
+    image: docker.package.tiredpixel.com/isoxya/isoxya-plugin-elasticsearch-build:head
     volumes:
       - ./.version:/home/x/repo/.version
       - ./isx-plugin-elasticsearch.cabal:/home/x/repo/isx-plugin-elasticsearch.cabal
