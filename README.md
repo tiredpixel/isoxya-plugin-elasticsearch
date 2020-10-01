@@ -5,6 +5,27 @@
 Since Isoxya supports both processor and streamer plugins using the Isoxya interfaces, it's not actually necessary to use this plugin at all, opening up the possibility of streaming to different datastores such as [PostgreSQL](https://www.postgresql.org/), [Apache Hadoop](https://hadoop.apache.org/), or [AWS Redshift](https://aws.amazon.com/redshift/) instead—or even not persisting the data at all, and connecting it to a web app using WebSockets, or alternatively to some alerting system.
 
 
+## Features
+
+- index auto-creation using organisation and date
+  `isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01`
+
+- insert using [Elasticsearch Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html)
+  `Content-Type: application/x-ndjson`
+
+- deterministic auto-generated document ids
+  `9c8100c7642a06acc892c9696e55789ec0dd67ad0dee06a5c378343b5e47a969.1`
+
+- one-to-many support for crawled pages which result in multiple documents, based on plugin tag
+  `org_proc.tag: spellchecker`
+
+- document metadata for position within sequence
+  `data_i`, `data_n`
+
+- variable request limit
+  `REQ_LIM`
+
+
 ## Setup (Elastic Stack)
 
 ### Auth
