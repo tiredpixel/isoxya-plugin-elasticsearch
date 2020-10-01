@@ -3,9 +3,10 @@ module ISX.Plugin.Elasticsearch.Zone.Common.Apex (
     ) where
 
 
+import              Data.Version                            (showVersion)
+import              Paths_isx_plugin_elasticsearch          (version)
 import              Snap.Core
 import              Snap.Extras.JSON
-import qualified    Data.Text                               as  T
 import qualified    Data.Time.Clock                         as  Clock
 import qualified    ISX.Plugin.Elasticsearch.Resource.Common as  R
 
@@ -13,5 +14,5 @@ import qualified    ISX.Plugin.Elasticsearch.Resource.Common as  R
 apex :: Snap ()
 apex = do
     t <- liftIO Clock.getCurrentTime
-    version <- liftIO (T.stripEnd <$> readFileText ".version")
-    writeJSON $ R.Apex t version
+    let v = toText $ showVersion version
+    writeJSON $ R.Apex t v

@@ -1,25 +1,24 @@
 version: "2.4"
 services:
-  plugin:
+  plug:
     env_file: .env
     image: docker.package.tiredpixel.com/isoxya/isoxya-plugin-elasticsearch-build:head
     volumes:
-      - ./.version:/home/x/repo/.version
       - ./isx-plugin-elasticsearch.cabal:/home/x/repo/isx-plugin-elasticsearch.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
       - ./test:/home/x/repo/test
     networks:
-      plugin:
+      plug:
         aliases:
-          - elasticsearch.plugins.dev.isoxya.com
+          - elasticsearch.plugin.dev.isoxya.com
       test: {}
   test_echo:
     image: docker.io/keisato/http-echo:latest
     networks:
       - test
 networks:
-  plugin:
+  plug:
     external: true
-    name: isoxya_plugin
+    name: isoxya_plug
   test: {}

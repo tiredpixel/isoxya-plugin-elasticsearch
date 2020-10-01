@@ -63,6 +63,7 @@ library isx-plugin-elasticsearch-int
         ISX.Plugin.Elasticsearch.Zone.Common.Data
     other-modules:
         ISX.Plugin.Elasticsearch.Resource.Common
+        Paths_isx_plugin_elasticsearch
     build-depends:
         common,
         --

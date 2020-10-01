@@ -2,7 +2,6 @@
 .*/
 Dockerfile
 docker-compose.yml
-!.version
 
 # Concourse CI
 cache/
