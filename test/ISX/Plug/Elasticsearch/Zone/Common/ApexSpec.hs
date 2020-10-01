@@ -1,4 +1,4 @@
-module ISX.Plugin.Elasticsearch.Zone.Common.ApexSpec (spec) where
+module ISX.Plug.Elasticsearch.Zone.Common.ApexSpec (spec) where
 
 
 import              ISX.Test

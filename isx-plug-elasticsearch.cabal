@@ -1,11 +1,11 @@
 cabal-version:          3.0
-name:                   isx-plugin-elasticsearch
+name:                   isx-plug-elasticsearch
 version:                0.0.0
 synopsis:               Isoxya Plugin Elasticsearch
 license:                NONE
 license-file:           LICENSE
-author:                 tiredpixel
-maintainer:             tiredpixel
+author:                 Nic Williams <tp@tiredpixel.com>
+maintainer:             Nic Williams <tp@tiredpixel.com>
 build-type:             Simple
 extra-source-files:     README.md
 --------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ common shared-properties
         -Wall
         -ddump-minimal-imports
 --------------------------------------------------------------------------------
-library common
+library common-ce
     import:             shared-properties
     exposed-modules:
         TPX.Com.API.Aeson
@@ -31,41 +31,33 @@ library common
         TPX.Com.API.Req
         TPX.Com.API.Res
         TPX.Com.API.Resource.CommonError
-        TPX.Com.API.Resource.ISX.Pipe
-        TPX.Com.API.Resource.ISX.PipeSnap
+        TPX.Com.API.Resource.ISX.Strm
+        TPX.Com.API.Resource.ISX.StrmSnap
         TPX.Com.Net
-    other-modules:
-        TPX.Com.URL
     build-depends:
         aeson,
-        bytestring,
-        conduit,
-        conduit-extra,
         http-conduit,
         http-types,
         network-uri,
-        regex-compat,
-        resourcet,
         snap-core,
         snap-extras,
-        text,
         time,
         unix,
         unordered-containers
     hs-source-dirs:
-        lib/common/src
+        lib/common-ce/src
 
-library isx-plugin-elasticsearch-int
+library isx-plug-elasticsearch-int
     import:             shared-properties
     exposed-modules:
-        ISX.Plugin.Elasticsearch.Route
-        ISX.Plugin.Elasticsearch.Zone.Common.Apex
-        ISX.Plugin.Elasticsearch.Zone.Common.Data
+        ISX.Plug.Elasticsearch.Route
+        ISX.Plug.Elasticsearch.Zone.Common.Apex
+        ISX.Plug.Elasticsearch.Zone.Common.Data
     other-modules:
-        ISX.Plugin.Elasticsearch.Resource.Common
-        Paths_isx_plugin_elasticsearch
+        ISX.Plug.Elasticsearch.Resource.Common
+        Paths_isx_plug_elasticsearch
     build-depends:
-        common,
+        common-ce,
         --
         aeson,
         bytestring,
@@ -84,54 +76,49 @@ library isx-plugin-elasticsearch-int
     hs-source-dirs:
         src
 --------------------------------------------------------------------------------
-executable isx-plugin-elasticsearch
+executable isx-plug-elasticsearch
     import:             shared-properties
     main-is:            Main.hs
     build-depends:
-        common,
-        isx-plugin-elasticsearch-int,
+        common-ce,
+        isx-plug-elasticsearch-int,
         --
         network-uri,
         snap-server
     hs-source-dirs:
-        src/ISX/Plugin/Elasticsearch/Bin
+        src/ISX/Plug/Elasticsearch/Bin
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
-library common-test
+library common-ce-test
     import:             shared-properties
     exposed-modules:
         TPX.Com.API.Test
     build-depends:
-        common,
+        common-ce,
         --
         aeson,
-        base64-bytestring,
-        bytestring,
-        directory,
-        filepath,
         hspec                           ==  2.*,
-        http-link-header,
         lens,
         lens-aeson,
         snap-core
     mixins:
         relude                          (Relude.Unsafe)
     hs-source-dirs:
-        lib/common/test
+        lib/common-ce/test
 
-test-suite isx-plugin-elasticsearch-test
+test-suite isx-plug-elasticsearch-test
     import:             shared-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
-        ISX.Plugin.Elasticsearch.Zone.Common.ApexSpec
-        ISX.Plugin.Elasticsearch.Zone.Common.DataSpec
+        ISX.Plug.Elasticsearch.Zone.Common.ApexSpec
+        ISX.Plug.Elasticsearch.Zone.Common.DataSpec
         ISX.Test
     build-depends:
-        isx-plugin-elasticsearch-int,
-        common,
-        common-test,
+        isx-plug-elasticsearch-int,
+        common-ce,
+        common-ce-test,
         --
         containers,
         hspec                           ==  2.*,

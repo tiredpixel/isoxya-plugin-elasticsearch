@@ -1,7 +1,7 @@
 module Main (main) where
 
 
-import              ISX.Plugin.Elasticsearch.Route
+import              ISX.Plug.Elasticsearch.Route
 import              Network.URI
 import              System.Environment                      (getEnv)
 import qualified    Snap.Http.Server                        as  Srv

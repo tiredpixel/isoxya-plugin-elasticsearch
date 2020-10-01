@@ -4,7 +4,7 @@ module ISX.Test (
     ) where
 
 
-import              ISX.Plugin.Elasticsearch.Route
+import              ISX.Plug.Elasticsearch.Route
 import              Network.URI
 import              System.Environment                      (getEnv)
 import              TPX.Com.API.Test

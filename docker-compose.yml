@@ -4,7 +4,7 @@ services:
     env_file: .env
     image: docker.package.tiredpixel.com/isoxya/isoxya-plugin-elasticsearch-build:head
     volumes:
-      - ./isx-plugin-elasticsearch.cabal:/home/x/repo/isx-plugin-elasticsearch.cabal
+      - ./isx-plug-elasticsearch.cabal:/home/x/repo/isx-plug-elasticsearch.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
       - ./test:/home/x/repo/test

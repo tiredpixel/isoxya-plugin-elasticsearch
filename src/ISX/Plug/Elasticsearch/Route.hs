@@ -1,10 +1,10 @@
-module ISX.Plugin.Elasticsearch.Route (site) where
+module ISX.Plug.Elasticsearch.Route (site) where
 
 
 import              Network.URI                             (URI)
 import              Snap.Core
-import qualified    ISX.Plugin.Elasticsearch.Zone.Common.Apex as  ZA
-import qualified    ISX.Plugin.Elasticsearch.Zone.Common.Data as  ZD
+import qualified    ISX.Plug.Elasticsearch.Zone.Common.Apex as  ZA
+import qualified    ISX.Plug.Elasticsearch.Zone.Common.Data as  ZD
 import qualified    TPX.Com.API.Res                         as  Res
 import qualified    TPX.Com.Net                             as  Net
 
