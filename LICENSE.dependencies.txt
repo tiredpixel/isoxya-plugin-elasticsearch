@@ -24,8 +24,6 @@
     License:  BSD3
 * attoparsec
     License:  BSD3
-* attoparsec-iso8601
-    License:  BSD3
 * base
     License:  BSD-3-Clause
 * base-compat
@@ -126,8 +124,6 @@
     License:  BSD3
 * entropy
     License:  BSD3
-* errors
-    License:  BSD3
 * exceptions
     License:  BSD3
 * fail
@@ -172,16 +168,12 @@
     License:  MIT
 * hspec-expectations
     License:  MIT
-* http-api-data
-    License:  BSD3
 * http-client
     License:  MIT
 * http-client-tls
     License:  MIT
 * http-conduit
     License:  BSD3
-* http-link-header
-    License:  PublicDomain
 * http-types
     License:  BSD3
 * integer-gmp
@@ -259,8 +251,6 @@
 * regex-base
     Synopsis: Common "Text.Regex.*" API for Regex matching
     License:  BSD3
-* regex-compat
-    License:  BSD3
 * regex-posix
     License:  BSD3
 * relude
@@ -315,6 +305,8 @@
     License:  BSD3
 * th-abstraction
     License:  ISC
+* th-compat
+    License:  BSD3
 * th-expand-syns
     License:  BSD3
 * th-lift
@@ -336,8 +328,6 @@
 * transformers-base
     License:  BSD3
 * transformers-compat
-    License:  BSD3
-* type-equality
     License:  BSD3
 * typed-process
     License:  MIT
