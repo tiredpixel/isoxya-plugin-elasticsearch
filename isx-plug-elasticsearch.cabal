@@ -98,6 +98,9 @@ library common-ce-test
         common-ce,
         --
         aeson,
+        bytestring,
+        directory,
+        filepath,
         hspec                           ==  2.*,
         lens,
         lens-aeson,
