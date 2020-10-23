@@ -102,8 +102,10 @@ library common-ce-test
         directory,
         filepath,
         hspec                           ==  2.*,
+        http-link-header,
         lens,
         lens-aeson,
+        network-uri,
         snap-core
     mixins:
         relude                          (Relude.Unsafe)
