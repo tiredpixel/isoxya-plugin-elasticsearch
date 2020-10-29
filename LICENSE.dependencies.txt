@@ -24,6 +24,8 @@
     License:  BSD3
 * attoparsec
     License:  BSD3
+* attoparsec-iso8601
+    License:  BSD3
 * base
     License:  BSD-3-Clause
 * base-compat
@@ -124,6 +126,8 @@
     License:  BSD3
 * entropy
     License:  BSD3
+* errors
+    License:  BSD3
 * exceptions
     License:  BSD3
 * fail
@@ -168,12 +172,16 @@
     License:  MIT
 * hspec-expectations
     License:  MIT
+* http-api-data
+    License:  BSD3
 * http-client
     License:  MIT
 * http-client-tls
     License:  MIT
 * http-conduit
     License:  BSD3
+* http-link-header
+    License:  PublicDomain
 * http-types
     License:  BSD3
 * integer-gmp
