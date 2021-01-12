@@ -184,6 +184,8 @@
     License:  PublicDomain
 * http-types
     License:  BSD3
+* indexed-traversable
+    License:  BSD2
 * integer-gmp
     License:  BSD3
 * integer-logarithms
