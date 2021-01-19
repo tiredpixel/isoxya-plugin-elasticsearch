@@ -11,7 +11,7 @@ import              Data.Time.Clock                         (UTCTime)
 import              Snap.Core
 import              System.Environment                      (lookupEnv)
 import              TPX.Com.API.Aeson
-import              TPX.Com.API.Resource.ISX.StrmSnap       ()
+import              TPX.Com.ISX.PlugStrmSnap                ()
 import qualified    Crypto.Hash                             as  Hash
 import qualified    Data.ByteString.Lazy.Char8              as  C8
 import qualified    Data.Text                               as  T
@@ -20,17 +20,17 @@ import qualified    Data.Vector                             as  V
 import qualified    Network.HTTP.Conduit                    as  HTTP
 import qualified    Network.HTTP.Types.Status               as  HTTPTS
 import qualified    Network.URI                             as  URI
-import qualified    TPX.Com.API.Ext.URI                     as  URI
 import qualified    TPX.Com.API.Req                         as  Req
 import qualified    TPX.Com.API.Res                         as  Res
-import qualified    TPX.Com.API.Resource.ISX.Strm           as  R
+import qualified    TPX.Com.ISX.PlugStrm                    as  R
 import qualified    TPX.Com.Net                             as  Net
+import qualified    TPX.Com.URI                             as  URI
 
 
 create :: URI.URI -> Net.Conn -> Snap ()
-create dUrl n = do
+create dURL n = do
     let Just dPath = URI.parseRelativeReference "/_bulk"
-    let reqUrl = URI.relativeTo dPath dUrl
+    let reqURL = URI.relativeTo dPath dURL
     reqLim_ <- liftIO $ join <$> (fmap . fmap) readMaybe (lookupEnv "REQ_LIM")
     let reqLim = fromMaybe reqLimDef reqLim_
     req_      <- Req.getBoundedJSON' reqLim >>= Req.validateJSON
@@ -41,37 +41,37 @@ create dUrl n = do
             encode $ jAction strm i,
             encode $ mergeObject (toJSON strm') $ jDataMeta i results_n
             ] | (i, strm') <- zip [1..] strms']
-    let uReq = Net.jsonNDReq $ Net.makeReq "POST" reqUrl uBody
+    let uReq = Net.jsonNDReq $ Net.makeReq "POST" reqURL uBody
     uRes <- liftIO $ Net.makeRes uReq n
     modifyResponse $ setResponseCode $
         HTTPTS.statusCode $ HTTP.responseStatus uRes
     writeLBS $ HTTP.responseBody uRes
 
 
-convStrm :: R.Strm -> [R.Strm]
+convStrm :: R.PlugStrm -> [R.PlugStrm]
 convStrm strm = if null r then rDef else r
     where
         dataSpellchecker = [mergeObject result $ object [
                 ("paragraph", String $ datum ^. key "paragraph" . _String)] |
-            datum  <- V.toList $ R.strmData strm ^. _Array,
+            datum  <- V.toList $ R.plugStrmData strm ^. _Array,
             result <- V.toList $ datum ^. key "results" . _Array]
-        r = case R.strmOrgProcTag strm of
+        r = case R.plugStrmPlugProcTag strm of
             "spellchecker" -> [strm {
-                R.strmData = datum} | datum <- dataSpellchecker]
+                R.plugStrmData = datum} | datum <- dataSpellchecker]
             _ -> rDef
         rDef = [strm]
 
-dId :: R.Strm -> Integer -> Text
+dId :: R.PlugStrm -> Integer -> Text
 dId strm i = show _idh <> "." <> show i
     where
-        _idh = hash (R.strmSiteSnapHref strm <> "|" <>
-            show (URI.unURIAbsolute $ R.strmUrl strm) <> "|" <>
-            R.strmOrgProcHref strm)
+        _idh = hash (R.plugStrmCrwlHref strm <> "|" <>
+            show (URI.unURIAbsolute $ R.plugStrmURL strm) <> "|" <>
+            R.plugStrmPlugProcHref strm)
 
-dIndex :: R.Strm -> Maybe Text
+dIndex :: R.PlugStrm -> Maybe Text
 dIndex strm = do
-    org <- unOrgHref $ R.strmOrgHref strm
-    let time = R.strmSiteSnapTBegin strm
+    org <- unOrgHref $ R.plugStrmOrgHref strm
+    let time = R.plugStrmCrwlTBegin strm
     return $ _ns <> _sep <> org <> _sep <> formatTime time
     where
         _sep = "."
@@ -83,7 +83,7 @@ formatTime = toText . Time.formatTime Time.defaultTimeLocale "%F"
 hash :: Text -> Hash.Digest Hash.SHA256
 hash t = Hash.hash (encodeUtf8 t :: ByteString)
 
-jAction :: R.Strm -> Integer -> Maybe Value
+jAction :: R.PlugStrm -> Integer -> Maybe Value
 jAction strm i = do
     dIndex' <- dIndex strm
     return $ object [
