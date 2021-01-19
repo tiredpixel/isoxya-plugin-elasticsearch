@@ -9,6 +9,7 @@ services:
       #
       - ./isx-plug-elasticsearch.cabal:/home/x/repo/isx-plug-elasticsearch.cabal
     networks:
+      es: {}
       plug:
         aliases:
           - elasticsearch.plugin.dev.isoxya.com
@@ -18,6 +19,9 @@ services:
     networks:
       - test
 networks:
+  es:
+    external: true
+    name: isoxya_es
   plug:
     external: true
     name: isoxya_plug
