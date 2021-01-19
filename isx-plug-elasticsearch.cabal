@@ -111,7 +111,6 @@ test-suite test-isx-plug-elasticsearch
         containers,
         hspec                           ==  2.*,
         network-uri,
-        text,
         vector,
     hs-source-dirs:
         test
