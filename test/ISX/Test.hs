@@ -1,18 +1,21 @@
 module ISX.Test (
     module TPX.Com.API.Test,
-    withSrv
+    withSrv,
     ) where
 
 
 import              ISX.Plug.Elasticsearch.Route
 import              Network.URI
-import              System.Environment                      (getEnv)
+import              System.Environment                      (lookupEnv)
 import              TPX.Com.API.Test
-import qualified    TPX.Com.Net                             as  Net
+import qualified    TPX.Com.Net                             as  N
 
 
 withSrv :: RequestBuilder IO () -> IO Response
 withSrv r = do
-    Just dUrl <- parseAbsoluteURI <$> getEnv "_TEST_ELASTICSEARCH_HOST"
-    n <- Net.openConn
-    runHandler r $ site dUrl n
+    Just u <- parseAbsoluteURI . fromMaybe uDef <$>
+        lookupEnv "_TEST_ELASTICSEARCH_HOST"
+    n <- N.openConn
+    runHandler r $ site u n
+    where
+        uDef = "http://test_echo"

@@ -1,4 +1,4 @@
-module ISX.Plug.Elasticsearch.Zone.Common.ApexSpec (spec) where
+module ISX.Plug.Elasticsearch.Zone.ApexSpec (spec) where
 
 
 import              ISX.Test
@@ -8,7 +8,7 @@ import qualified    Data.Map                                as  M
 
 spec :: Spec
 spec =
-    describe "/ GET" $
+    describe "apex" $
         it "ok" $ do
             res <- withSrv $ get "/" pR
             assertSuccess res

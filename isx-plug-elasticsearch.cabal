@@ -101,8 +101,8 @@ test-suite test-isx-plug-elasticsearch
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
-        ISX.Plug.Elasticsearch.Zone.Common.ApexSpec
-        ISX.Plug.Elasticsearch.Zone.Common.DataSpec
+        ISX.Plug.Elasticsearch.Zone.ApexSpec
+        ISX.Plug.Elasticsearch.Zone.DataSpec
         ISX.Test
     build-depends:
         common-ce-test,

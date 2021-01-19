@@ -1,4 +1,4 @@
-module ISX.Plug.Elasticsearch.Zone.Common.DataSpec (spec) where
+module ISX.Plug.Elasticsearch.Zone.DataSpec (spec) where
 
 
 import              ISX.Test
@@ -8,7 +8,7 @@ import qualified    Data.Vector                             as  V
 
 spec :: Spec
 spec =
-    describe "/data POST" $ do
+    describe "create" $ do
         it "ok crawler-html" $ do
             res <- withSrv $ postJSON "/data" pC
             assertSuccess res
@@ -25,7 +25,7 @@ spec =
             let pC' = mergeObject pC $ object [
                     ("data", object [
                         ("meta", object [
-                            ("status_code", Number 418)])]),
+                            ("status", Number 418)])]),
                     ("plug_proc", object [
                         ("tag", "link-checker")])]
             res <- withSrv $ postJSON "/data" pC'
@@ -33,10 +33,10 @@ spec =
             b <- getResponseBody res
             (sort . lines . decodeUtf8) b `shouldContainSubseq` [
                 "Accept-Encoding: gzip",
-                "Content-Length: 646",
+                "Content-Length: 641",
                 "Content-Type: application/x-ndjson",
                 "POST /_bulk HTTP/1.1",
-                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"meta\":{\"status_code\":418}},\"url\":\"http://example.com:80/\",\"data_i\":1,\"plug_proc\":{\"tag\":\"link-checker\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1}",
+                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":{\"meta\":{\"status\":418}},\"url\":\"http://example.com:80/\",\"data_i\":1,\"plug_proc\":{\"tag\":\"link-checker\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1}",
                 "{\"index\":{\"_id\":\"e0828807ee5c102320cd61034c1b1c2a180344448544244b08f5480619a4f0e4.1\",\"_index\":\"isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01\"}}"]
         
         it "ok spellchecker" $ do
