@@ -31,7 +31,7 @@ COPY --chown=x:x [ \
 RUN cabal v1-update && \
     cabal v1-install -j --only-dependencies --enable-tests
 #-------------------------------------------------------------------------------
-ENV PATH ${HOME}/.cabal/bin:$PATH \
+ENV PATH=${HOME}/.cabal/bin:$PATH \
     ADDRESS=0.0.0.0 \
     PORT=8000
 
