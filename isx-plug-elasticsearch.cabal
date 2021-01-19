@@ -29,9 +29,9 @@ library lib-isx-plug-elasticsearch
         TPX.Com.API.Res
         TPX.Com.Net
     other-modules:
-        ISX.Plug.Elasticsearch.Resource.Common
-        ISX.Plug.Elasticsearch.Zone.Common.Apex
-        ISX.Plug.Elasticsearch.Zone.Common.Data
+        ISX.Plug.Elasticsearch.Resource
+        ISX.Plug.Elasticsearch.Zone.Apex
+        ISX.Plug.Elasticsearch.Zone.Data
         Paths_isx_plug_elasticsearch
         TPX.Com.API.Req
         TPX.Com.API.Resource

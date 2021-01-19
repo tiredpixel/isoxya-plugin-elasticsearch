@@ -1,5 +1,8 @@
-module ISX.Plug.Elasticsearch.Resource.Common (
-    Apex(..)
+{-# LANGUAGE RecordWildCards #-}
+
+
+module ISX.Plug.Elasticsearch.Resource (
+    Apex(..),
     ) where
 
 
@@ -12,6 +15,6 @@ data Apex = Apex {
     apexVersion :: Text
     } deriving (Show)
 instance ToJSON Apex where
-    toJSON o = object [
-        "t_now"   .= apexTNow o,
-        "version" .= apexVersion o]
+    toJSON Apex{..} = object [
+        "t_now"   .= apexTNow,
+        "version" .= apexVersion]
