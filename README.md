@@ -17,13 +17,10 @@ Since Isoxya supports both processor and streamer plugins using the Isoxya inter
   `9c8100c7642a06acc892c9696e55789ec0dd67ad0dee06a5c378343b5e47a969.1`
 
 - one-to-many support for crawled pages which result in multiple documents, based on plugin tag
-  `org_proc.tag: spellchecker`
+  `plug_proc.tag: spellchecker`
 
 - document metadata for position within sequence
   `data_i`, `data_n`
-
-- variable request limit
-  `REQ_LIM`
 
 
 ## Setup (Elastic Stack)
@@ -38,7 +35,7 @@ Since Isoxya supports both processor and streamer plugins using the Isoxya inter
       - `index`
       - `create_index`
 
-- create user `eg_user`
+- create user `isx_dev_plug_elasticsearch`
   - Roles
     - `isx_plug_elasticsearch`
 
