@@ -3,6 +3,7 @@
 
 module ISX.Plug.Elasticsearch.Resource (
     Apex(..),
+    ESBulkRes(..),
     ) where
 
 
@@ -18,3 +19,11 @@ instance ToJSON Apex where
     toJSON Apex{..} = object [
         "t_now"   .= apexTNow,
         "version" .= apexVersion]
+
+newtype ESBulkRes = ESBulkRes {
+    esBulkResErrors :: Bool
+    } deriving (Show)
+instance FromJSON ESBulkRes where
+    parseJSON = withObject "es.bulk.res" $ \j -> do
+        esBulkResErrors <- j .: "errors"
+        return ESBulkRes{..}

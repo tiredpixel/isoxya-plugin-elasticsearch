@@ -8,6 +8,7 @@ import              Data.Aeson
 import              Data.Aeson.Lens
 import              Data.Scientific                         (scientific)
 import              Data.Time.Clock                         (UTCTime)
+import              ISX.Plug.Elasticsearch.Resource
 import              Network.URI
 import              Snap.Core
 import              TPX.Com.API.Aeson
@@ -38,8 +39,10 @@ create u n = do
             ] | (i, strm') <- zip [1..] strms']
     let uReq = N.jsonNDReq $ N.makeReq "POST" reqURL uBody
     uRes <- liftIO $ N.makeRes uReq n
-    modifyResponse $ setResponseCode $
-        HTTP.statusCode $ HTTP.responseStatus uRes
+    let rx_ = decode $ HTTP.responseBody uRes :: Maybe ESBulkRes
+    modifyResponse $ setResponseCode $ case esBulkResErrors <$> rx_ of
+        Just True -> 400
+        _         -> HTTP.statusCode $ HTTP.responseStatus uRes
     writeLBS $ HTTP.responseBody uRes
     where
         Just uPath = parseRelativeReference "/_bulk"
