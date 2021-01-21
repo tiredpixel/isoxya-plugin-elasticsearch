@@ -35,7 +35,7 @@ create u n = do
     let resultsN = toInteger $ length strms'
     let uBody = C8.unlines $ concat [[
             encode $ jAction strm i,
-            encode $ mergeObject (toJSON strm') $ jDataMeta i resultsN
+            encode $ jDataNS $ mergeObject (toJSON strm') $ jDataMeta i resultsN
             ] | (i, strm') <- zip [1..] strms']
     let uReq = N.jsonNDReq $ N.makeReq "POST" reqURL uBody
     uRes <- liftIO $ N.makeRes uReq n
@@ -97,6 +97,17 @@ jDataMeta :: Integer -> Integer -> Value
 jDataMeta i n = object [
     ("data_i", Number $ scientific i 0),
     ("data_n", Number $ scientific n 0)]
+
+-- ES throws errors when importing keys with types different to those already
+-- auto-detected. Thus, we append the PlugProc tag as a suffix to the key. The
+-- way of doing this here is hacky, and there is surely a better way -- perhaps
+-- using lenses better, or maybe avoiding this whole approach and instead
+-- handling it at the ToJSON instance level.
+jDataNS :: Value -> Value
+jDataNS j = mergeObject j $ object [
+    ("data." <> j ^. key "plug_proc" . key "tag" . _String,
+        Object $ j ^. key "data" . _Object),
+    ("data", Null)]
 
 unOrgHref :: Text -> Maybe Text
 unOrgHref h = do
