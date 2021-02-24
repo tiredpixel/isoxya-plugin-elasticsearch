@@ -82,15 +82,23 @@ library common-ce-test
         lib-isx-plug-elasticsearch,
         --
         aeson,
+        base64-bytestring,
         bytestring,
+        containers,
         directory,
         filepath,
         hspec                           ==  2.*,
+        hspec-core,
+        hspec-snap,
         http-link-header,
         lens,
         lens-aeson,
+        mtl,
         network-uri,
+        process,
         snap-core,
+        text,
+        unordered-containers,
     mixins:
         relude                          (Relude.Unsafe)
     hs-source-dirs:
@@ -108,10 +116,14 @@ test-suite test-isx-plug-elasticsearch
         common-ce-test,
         lib-isx-plug-elasticsearch,
         --
-        containers,
+        base64-bytestring,
+        directory,
         hspec                           ==  2.*,
         network-uri,
-        vector,
+        snap,
+        text,
+        time,
+        unordered-containers,
     hs-source-dirs:
         test
     build-tool-depends:
