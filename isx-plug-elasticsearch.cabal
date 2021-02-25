@@ -120,15 +120,11 @@ test-suite test-isx-plug-elasticsearch
         common-ce-test,
         lib-isx-plug-elasticsearch,
         --
-        base64-bytestring,
         bytestring,
-        directory,
         hspec                           ==  2.*,
         network-uri,
-        snap,
         text,
         time,
-        unordered-containers,
     default-extensions:
         NoImplicitPrelude
     hs-source-dirs:
