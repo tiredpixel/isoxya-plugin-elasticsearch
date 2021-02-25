@@ -24,20 +24,20 @@ common common-properties
 library lib-isx-plug-elasticsearch
     import:             common-properties
     exposed-modules:
-        ISX.Plug.Elasticsearch.Route
-        TPX.Com.API.Aeson
-        TPX.Com.API.Res
+        ISX.Plug.Elasticsearch
+        ISX.Plug.Elasticsearch.Core
+        TPX.Com.Isoxya.PlugStrm
         TPX.Com.Net
+        TPX.Com.Snap.CoreUtils
+        TPX.Com.URI
     other-modules:
+        Paths_isx_plug_elasticsearch
+        ISX.Plug.Elasticsearch.Init
         ISX.Plug.Elasticsearch.Resource
+        ISX.Plug.Elasticsearch.Types
         ISX.Plug.Elasticsearch.Zone.Apex
         ISX.Plug.Elasticsearch.Zone.Data
-        Paths_isx_plug_elasticsearch
-        TPX.Com.API.Req
-        TPX.Com.API.Resource
-        TPX.Com.ISX.PlugStrm
-        TPX.Com.ISX.PlugStrmSnap
-        TPX.Com.URI
+        TPX.Com.Isoxya.Snap.PlugStrm
     build-depends:
         aeson,
         bytestring,
@@ -48,8 +48,10 @@ library lib-isx-plug-elasticsearch
         lens-aeson,
         network-uri,
         scientific,
+        snap,
         snap-core,
         snap-extras,
+        snap-server,
         text,
         time,
         unix,
@@ -67,8 +69,9 @@ executable isx-plug-elasticsearch
     build-depends:
         lib-isx-plug-elasticsearch,
         --
+        lens,
         network-uri,
-        snap-server,
+        snap,
     hs-source-dirs:
         src/ISX/Plug/Bin
     ghc-options:
@@ -77,7 +80,9 @@ executable isx-plug-elasticsearch
 library common-ce-test
     import:             common-properties
     exposed-modules:
-        TPX.Com.API.Test
+        TPX.Com.Snap.Test
+    other-modules:
+        TPX.Com.Snap.TestUtils
     build-depends:
         lib-isx-plug-elasticsearch,
         --
@@ -99,8 +104,7 @@ library common-ce-test
         snap-core,
         text,
         unordered-containers,
-    mixins:
-        relude                          (Relude.Unsafe)
+        vector,
     hs-source-dirs:
         lib/common-ce/test
 --------------------------------------------------------------------------------
@@ -109,14 +113,15 @@ test-suite test-isx-plug-elasticsearch
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
+        ISX.Plug.Elasticsearch.Test
         ISX.Plug.Elasticsearch.Zone.ApexSpec
         ISX.Plug.Elasticsearch.Zone.DataSpec
-        ISX.Test
     build-depends:
         common-ce-test,
         lib-isx-plug-elasticsearch,
         --
         base64-bytestring,
+        bytestring,
         directory,
         hspec                           ==  2.*,
         network-uri,
@@ -124,6 +129,8 @@ test-suite test-isx-plug-elasticsearch
         text,
         time,
         unordered-containers,
+    default-extensions:
+        NoImplicitPrelude
     hs-source-dirs:
         test
     build-tool-depends:

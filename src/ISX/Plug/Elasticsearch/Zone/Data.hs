@@ -3,32 +3,30 @@ module ISX.Plug.Elasticsearch.Zone.Data (
     ) where
 
 
-import              Control.Lens
-import              Data.Aeson
-import              Data.Aeson.Lens
-import              Data.Scientific                         (scientific)
-import              Data.Time.Clock                         (UTCTime)
-import              ISX.Plug.Elasticsearch.Resource
-import              Network.URI
-import              Snap.Core
-import              TPX.Com.API.Aeson
-import              TPX.Com.API.Req
-import              TPX.Com.API.Res
-import              TPX.Com.ISX.PlugStrm
-import              TPX.Com.ISX.PlugStrmSnap                ()
-import              TPX.Com.URI
-import qualified    Crypto.Hash                             as  Hash
-import qualified    Data.ByteString.Lazy.Char8              as  C8
-import qualified    Data.Text                               as  T
-import qualified    Data.Time.Format                        as  Time
-import qualified    Data.Vector                             as  V
-import qualified    Network.HTTP.Conduit                    as  HTTP
-import qualified    Network.HTTP.Types.Status               as  HTTP
-import qualified    TPX.Com.Net                             as  N
+import           Control.Lens
+import           Data.Aeson.Lens
+import           Data.Scientific              (scientific)
+import           Data.Time.Clock
+import           ISX.Plug.Elasticsearch.Core
+import           Network.URI
+import           TPX.Com.Isoxya.PlugStrm
+import           TPX.Com.Isoxya.Snap.PlugStrm ()
+import           TPX.Com.URI
+import qualified Crypto.Hash                  as Hash
+import qualified Data.ByteString.Lazy.Char8   as C8
+import qualified Data.Text                    as T
+import qualified Data.Time.Format             as Time
+import qualified Data.Vector                  as V
+import qualified Network.HTTP.Conduit         as HTTP
+import qualified Network.HTTP.Types.Status    as HTTP
+import qualified TPX.Com.Net                  as N
 
 
-create :: URI -> N.Conn -> Snap ()
-create u n = do
+create :: Handler b Elasticsearch ()
+create = do
+    u <- gets _up
+    n <- gets _net
+    let reqURL = relativeTo uPath u
     req_      <- getBoundedJSON' reqLim >>= validateJSON
     Just strm <- runValidate req_
     let strms' = convStrm strm
@@ -46,7 +44,6 @@ create u n = do
     writeLBS $ HTTP.responseBody uRes
     where
         Just uPath = parseRelativeReference "/_bulk"
-        reqURL = relativeTo uPath u
         reqLim = 2097152 -- 2 MB = (1 + .5) * (4/3) MB
 
 

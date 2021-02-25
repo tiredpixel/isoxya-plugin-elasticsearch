@@ -1,121 +1,79 @@
 module ISX.Plug.Elasticsearch.Zone.DataSpec (spec) where
 
 
-import              ISX.Test
-import              Prelude                                 hiding  (get)
-import qualified    Data.Vector                             as  V
+import           ISX.Plug.Elasticsearch.Test
+import           TPX.Com.Isoxya.PlugStrm
+import qualified Data.ByteString.Lazy.Char8  as C8
 
 
 spec :: Spec
-spec =
+spec = snapElasticsearch $
     describe "create" $ do
-        it "ok crawler-html" $ do
-            res <- withSrv $ postJSON "/data" pC
-            assertSuccess res
-            b <- getResponseBody res
-            (sort . lines . decodeUtf8) b `shouldContainSubseq` [
-                "Accept-Encoding: gzip",
-                "Content-Length: 645",
-                "Content-Type: application/x-ndjson",
-                "POST /_bulk HTTP/1.1",
-                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"data.crawler-html\":{},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":null,\"url\":\"http://example.com:80/\",\"data_i\":1,\"plug_proc\":{\"tag\":\"crawler-html\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1}",
-                "{\"index\":{\"_id\":\"e0828807ee5c102320cd61034c1b1c2a180344448544244b08f5480619a4f0e4.1\",\"_index\":\"isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01\"}}"]
+        it "crawler-html => 200" $ do
+            (i, dataE) <- load "example.com" "crawler-html" "" Null
+            let req = postJSON "/data" i
+            res <- runRequest req
+            test res dataE
         
-        it "ok link-checker" $ do
-            let pC' = mergeObject pC $ object [
-                    ("data", object [
-                        ("meta", object [
-                            ("status", Number 418)])]),
-                    ("plug_proc", object [
-                        ("tag", "link-checker")])]
-            res <- withSrv $ postJSON "/data" pC'
-            assertSuccess res
-            b <- getResponseBody res
-            (sort . lines . decodeUtf8) b `shouldContainSubseq` [
-                "Accept-Encoding: gzip",
-                "Content-Length: 666",
-                "Content-Type: application/x-ndjson",
-                "POST /_bulk HTTP/1.1",
-                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"data.link-checker\":{\"meta\":{\"status\":418}},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":null,\"url\":\"http://example.com:80/\",\"data_i\":1,\"plug_proc\":{\"tag\":\"link-checker\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1}",
-                "{\"index\":{\"_id\":\"e0828807ee5c102320cd61034c1b1c2a180344448544244b08f5480619a4f0e4.1\",\"_index\":\"isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01\"}}"]
+        it "link-checker => 200" $ do
+            (i, dataE) <- load "example.com" "link-checker" "" $ object [
+                ("meta", object [
+                    ("status", Number 418)])]
+            let req = postJSON "/data" i
+            res <- runRequest req
+            test res dataE
         
-        it "ok spellchecker" $ do
-            let pC' = mergeObject pC $ object [
-                    ("data", Array $ V.fromList [
+        it "spellchecker => 200" $ do
+            (i, dataE) <- load "example.com" "spellchecker" "" $ array [
+                object [
+                    ("results", array [
                         object [
-                            ("results", Array $ V.fromList [
-                                object [
-                                    ("status", "miss"),
-                                    ("offset", Number 1),
-                                    ("correct", Bool False),
-                                    ("suggestions", Array $ V.fromList [
-                                        "Paragraf"]),
-                                    ("word", "Paragraph")],
-                                object [
-                                    ("status", "miss"),
-                                    ("offset", Number 11),
-                                    ("correct", Bool False),
-                                    ("suggestions", Array $ V.fromList [
-                                        "1"]),
-                                    ("word", "One")]]),
-                            ("paragraph", "Paragraph One.")],
+                            ("status", "miss"),
+                            ("offset", Number 1),
+                            ("correct", Bool False),
+                            ("suggestions", array [
+                                "Paragraf"]),
+                            ("word", "Paragraph")],
                         object [
-                            ("results", Array $ V.fromList [
-                                object [
-                                    ("status", "miss"),
-                                    ("offset", Number 11),
-                                    ("correct", Bool False),
-                                    ("suggestions", Array $ V.fromList [
-                                        "2"]),
-                                    ("word", "Two")]]),
-                            ("paragraph", "Paragraph Two.")]]),
-                    ("plug_proc", object [
-                        ("tag", "spellchecker")])]
-            res <- withSrv $ postJSON "/data" pC'
-            assertSuccess res
-            b <- getResponseBody res
-            (sort . lines . decodeUtf8) b `shouldContainSubseq` [
-                "Accept-Encoding: gzip",
-                "Content-Length: 2262",
-                "Content-Type: application/x-ndjson",
-                "POST /_bulk HTTP/1.1",
-                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":null,\"url\":\"http://example.com:80/\",\"data_i\":1,\"plug_proc\":{\"tag\":\"spellchecker\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3,\"data.spellchecker\":{\"status\":\"miss\",\"offset\":1,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"Paragraf\"],\"word\":\"Paragraph\"}}",
-                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":null,\"url\":\"http://example.com:80/\",\"data_i\":2,\"plug_proc\":{\"tag\":\"spellchecker\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3,\"data.spellchecker\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph One.\",\"correct\":false,\"suggestions\":[\"1\"],\"word\":\"One\"}}",
-                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":null,\"url\":\"http://example.com:80/\",\"data_i\":3,\"plug_proc\":{\"tag\":\"spellchecker\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":3,\"data.spellchecker\":{\"status\":\"miss\",\"offset\":11,\"paragraph\":\"Paragraph Two.\",\"correct\":false,\"suggestions\":[\"2\"],\"word\":\"Two\"}}",
-                "{\"index\":{\"_id\":\"e0828807ee5c102320cd61034c1b1c2a180344448544244b08f5480619a4f0e4.1\",\"_index\":\"isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01\"}}",
-                "{\"index\":{\"_id\":\"e0828807ee5c102320cd61034c1b1c2a180344448544244b08f5480619a4f0e4.2\",\"_index\":\"isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01\"}}",
-                "{\"index\":{\"_id\":\"e0828807ee5c102320cd61034c1b1c2a180344448544244b08f5480619a4f0e4.3\",\"_index\":\"isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01\"}}"]
+                            ("status", "miss"),
+                            ("offset", Number 11),
+                            ("correct", Bool False),
+                            ("suggestions", array [
+                                "1"]),
+                            ("word", "One")]]),
+                    ("paragraph", "Paragraph One.")],
+                object [
+                    ("results", array [
+                        object [
+                            ("status", "miss"),
+                            ("offset", Number 11),
+                            ("correct", Bool False),
+                            ("suggestions", array [
+                                "2"]),
+                            ("word", "Two")]]),
+                    ("paragraph", "Paragraph Two.")]]
+            let req = postJSON "/data" i
+            res <- runRequest req
+            test res dataE
         
-        it "ok spellchecker empty-data" $ do
-            let pC' = mergeObject pC $ object [
-                    ("data", Array V.empty),
-                    ("plug_proc", object [
-                        ("tag", "spellchecker")])]
-            res <- withSrv $ postJSON "/data" pC'
-            assertSuccess res
-            b <- getResponseBody res
-            (sort . lines . decodeUtf8) b `shouldContainSubseq` [
-                "Accept-Encoding: gzip",
-                "Content-Length: 645",
-                "Content-Type: application/x-ndjson",
-                "POST /_bulk HTTP/1.1",
-                "{\"crwl\":{\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z\",\"t_begin\":\"2019-05-01T06:19:54.48295Z\"},\"org\":{\"href\":\"/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd\"},\"t_retrieval\":\"2019-05-01T06:06:48.740524Z\",\"data\":null,\"url\":\"http://example.com:80/\",\"data_i\":1,\"plug_proc\":{\"tag\":\"spellchecker\",\"href\":\"/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005\"},\"site\":{\"url\":\"http://example.com:80\",\"href\":\"/site/aHR0cDovL2V4YW1wbGUuY29tOjgw\"},\"data_n\":1,\"data.spellchecker\":{}}",
-                "{\"index\":{\"_id\":\"e0828807ee5c102320cd61034c1b1c2a180344448544244b08f5480619a4f0e4.1\",\"_index\":\"isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01\"}}"]
+        it "spellchecker empty data => 200" $ do
+            (i, dataE) <- load "example.com" "spellchecker" "-empty-data" Null
+            let req = postJSON "/data" i
+            res <- runRequest req
+            test res dataE
 
 
-pC :: Value
-pC = object [
-    ("data", object []),
-    ("org", object [
-        ("href", "/org/f9b4a163-36a8-4b25-8958-d58e52a1a5bd")]),
-    ("plug_proc", object [
-        ("href", "/plug_proc/8ddf53cc-6a72-11e9-8001-0242ac160005"),
-        ("tag", "crawler-html")]),
-    ("site", object [
-        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw"),
-        ("url", "http://example.com:80")]),
-    ("crwl", object [
-        ("href", "/site/aHR0cDovL2V4YW1wbGUuY29tOjgw/crwl/2019-05-01T06:19:54.48295Z"),
-        ("t_begin", "2019-05-01T06:19:54.48295Z")]),
-    ("url", "http://example.com:80/"),
-    ("t_retrieval", "2019-05-01T06:06:48.740524Z")]
+load :: MonadIO m => Text -> Text -> Text -> Value -> m (PlugStrm, [Value])
+load url tag sfx dat = do
+    let i = genPlugStrm url tag dat
+    b <- readFileLBS $ fixtureResult url (tag <> sfx)
+    let Just dataE = sequence (decode <$> C8.lines b)
+    return (i, dataE)
+
+test :: Response -> [Value] -> SnapHspecM b ()
+test res dataE = do
+    rspStatus res `shouldBe` 200
+    b <- getResponseBody res
+    let b' = snd $ splitHeaderBody' b
+    let Just dataA = sequence (decode <$> C8.lines (fromStrict b'))
+    dataA `shouldBeListJSON` dataE

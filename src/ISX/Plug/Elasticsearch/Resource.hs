@@ -7,8 +7,8 @@ module ISX.Plug.Elasticsearch.Resource (
     ) where
 
 
-import              Data.Aeson
-import              Data.Time.Clock                         (UTCTime)
+import Data.Aeson
+import Data.Time.Clock
 
 
 data Apex = Apex {

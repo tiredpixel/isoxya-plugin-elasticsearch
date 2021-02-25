@@ -1,22 +1,17 @@
 module ISX.Plug.Elasticsearch.Zone.ApexSpec (spec) where
 
 
-import              ISX.Test
-import              Prelude                                 hiding  (get)
-import qualified    Data.Map                                as  M
+import ISX.Plug.Elasticsearch.Test
 
 
 spec :: Spec
-spec =
+spec = snapElasticsearch $
     describe "apex" $
-        it "ok" $ do
-            res <- withSrv $ get "/" pR
-            assertSuccess res
+        it "=> 200" $ do
+            let req = get "/" emptyP
+            res <- runRequest req
+            rspStatus res `shouldBe` 200
             b <- getResponseBody res
-            toString (b ^. key "t_now" . _String) `shouldContain` "T"
+            b ^. key "t_now" . _String `shouldContain` "T"
             b ^. key "version" . _String `shouldBe` "0.0.0"
-            assertElemN res 2
-
-
-pR :: Params
-pR = M.empty
+            b ^. _Object `shouldMeasure` 2
