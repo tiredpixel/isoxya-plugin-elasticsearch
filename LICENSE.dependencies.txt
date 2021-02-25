@@ -1,6 +1,10 @@
 * Cabal
     License:  BSD3
+* HTTP
+    License:  BSD3
 * HUnit
+    License:  BSD3
+* HandsomeSoup
     License:  BSD3
 * QuickCheck
     License:  BSD3
@@ -172,6 +176,8 @@
     License:  MIT
 * hspec-expectations
     License:  MIT
+* hspec-snap
+    License:  BSD3
 * http-api-data
     License:  BSD3
 * http-client
@@ -184,6 +190,17 @@
     License:  PublicDomain
 * http-types
     License:  BSD3
+* hxt
+    License:  MIT
+* hxt-charproperties
+    License:  MIT
+* hxt-http
+    License:  MIT
+* hxt-regex-xmlschema
+    License:  MIT
+* hxt-unicode
+    Synopsis: Unicode en-/decoding functions for utf8, iso-latin-* and other
+    License:  MIT
 * indexed-traversable
     License:  BSD2
 * integer-gmp
