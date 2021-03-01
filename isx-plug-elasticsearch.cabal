@@ -21,24 +21,52 @@ common common-properties
         -Wall
         -ddump-minimal-imports
 --------------------------------------------------------------------------------
+library lib-common-ce
+    import:             common-properties
+    exposed-modules:
+        --TPX.Com.Cursor
+        --TPX.Com.Isoxya.PlugProc
+        --TPX.Com.Isoxya.PlugStrm
+        --TPX.Com.Net
+        --TPX.Com.Snap.CoreUtils
+        --TPX.Com.URI
+    build-depends:
+        aeson,
+        base64-bytestring,
+        bytestring,
+        conduit,
+        conduit-extra,
+        http-conduit,
+        http-types,
+        network-uri,
+        regex-compat,
+        resourcet,
+        safe,
+        snap-core,
+        snap-extras,
+        snap-server,
+        time,
+        unix,
+        unordered-containers,
+    hs-source-dirs:
+        lib/common-ce/src
+--------------------------------------------------------------------------------
 library lib-isx-plug-elasticsearch
     import:             common-properties
     exposed-modules:
-        ISX.Plug.Elasticsearch
-        ISX.Plug.Elasticsearch.Core
-        TPX.Com.Isoxya.PlugStrm
-        TPX.Com.Net
-        TPX.Com.Snap.CoreUtils
-        TPX.Com.URI
     other-modules:
         Paths_isx_plug_elasticsearch
+        --
+        ISX.Plug.Elasticsearch
+        ISX.Plug.Elasticsearch.Core
         ISX.Plug.Elasticsearch.Init
         ISX.Plug.Elasticsearch.Resource
         ISX.Plug.Elasticsearch.Types
         ISX.Plug.Elasticsearch.Zone.Apex
         ISX.Plug.Elasticsearch.Zone.Data
-        TPX.Com.Isoxya.Snap.PlugStrm
     build-depends:
+        lib-common-ce,
+        --
         aeson,
         bytestring,
         cryptonite,
@@ -58,7 +86,6 @@ library lib-isx-plug-elasticsearch
         unordered-containers,
         vector,
     hs-source-dirs:
-        lib/common-ce/src
         src
 --------------------------------------------------------------------------------
 executable isx-plug-elasticsearch
@@ -67,6 +94,7 @@ executable isx-plug-elasticsearch
     other-modules:
         Paths_isx_plug_elasticsearch
     build-depends:
+        lib-common-ce,
         lib-isx-plug-elasticsearch,
         --
         lens,
@@ -77,14 +105,14 @@ executable isx-plug-elasticsearch
     ghc-options:
         -threaded
 --------------------------------------------------------------------------------
-library common-ce-test
+library lib-common-ce-test
     import:             common-properties
     exposed-modules:
         TPX.Com.Snap.Test
     other-modules:
         TPX.Com.Snap.TestUtils
     build-depends:
-        lib-isx-plug-elasticsearch,
+        lib-common-ce,
         --
         aeson,
         base64-bytestring,
@@ -117,7 +145,8 @@ test-suite test-isx-plug-elasticsearch
         ISX.Plug.Elasticsearch.Zone.ApexSpec
         ISX.Plug.Elasticsearch.Zone.DataSpec
     build-depends:
-        common-ce-test,
+        lib-common-ce,
+        lib-common-ce-test,
         lib-isx-plug-elasticsearch,
         --
         bytestring,
