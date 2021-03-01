@@ -7,7 +7,7 @@ import           Control.Lens
 import           Data.Aeson.Lens
 import           Data.Scientific              (scientific)
 import           Data.Time.Clock
-import           ISX.Plug.Elasticsearch.Core
+import           ISX.Plug.Elasticsearch.Core  hiding (formatTime)
 import           Network.URI
 import           TPX.Com.Isoxya.PlugStrm
 import           TPX.Com.Isoxya.Snap.PlugStrm ()

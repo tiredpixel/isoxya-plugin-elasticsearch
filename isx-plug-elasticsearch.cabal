@@ -24,15 +24,15 @@ common common-properties
 library lib-common-ce
     import:             common-properties
     exposed-modules:
-        --TPX.Com.Cursor
-        --TPX.Com.Isoxya.PlugProc
-        --TPX.Com.Isoxya.PlugStrm
-        --TPX.Com.Net
-        --TPX.Com.Snap.CoreUtils
-        --TPX.Com.URI
+        TPX.Com.Isoxya.PlugStrm
+        TPX.Com.Isoxya.Snap.PlugStrm
+        TPX.Com.Net
+        TPX.Com.Snap.CoreUtils
+        TPX.Com.URI
+    other-modules:
+        TPX.Com.Cursor
     build-depends:
         aeson,
-        base64-bytestring,
         bytestring,
         conduit,
         conduit-extra,
@@ -54,11 +54,11 @@ library lib-common-ce
 library lib-isx-plug-elasticsearch
     import:             common-properties
     exposed-modules:
+        ISX.Plug.Elasticsearch
+        ISX.Plug.Elasticsearch.Core
     other-modules:
         Paths_isx_plug_elasticsearch
         --
-        ISX.Plug.Elasticsearch
-        ISX.Plug.Elasticsearch.Core
         ISX.Plug.Elasticsearch.Init
         ISX.Plug.Elasticsearch.Resource
         ISX.Plug.Elasticsearch.Types
@@ -79,11 +79,8 @@ library lib-isx-plug-elasticsearch
         snap,
         snap-core,
         snap-extras,
-        snap-server,
         text,
         time,
-        unix,
-        unordered-containers,
         vector,
     hs-source-dirs:
         src
