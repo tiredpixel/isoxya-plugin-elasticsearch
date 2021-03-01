@@ -3,6 +3,7 @@ services:
   plug_elasticsearch:
     image: docker.package.tiredpixel.com/isoxya/isoxya-plugin-elasticsearch-build:head
     volumes:
+      - ./dist:/home/x/repo/dist
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
       - ./test:/home/x/repo/test
@@ -14,10 +15,12 @@ services:
         aliases:
           - elasticsearch.plugin.dev.isoxya.com
       test: {}
+    restart: on-failure
   test_echo:
     image: docker.io/keisato/http-echo:latest
     networks:
       - test
+    restart: on-failure
 networks:
   es:
     external: true
