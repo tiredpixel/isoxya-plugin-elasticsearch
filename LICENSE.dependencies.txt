@@ -278,6 +278,8 @@
 * regex-base
     Synopsis: Common "Text.Regex.*" API for Regex matching
     License:  BSD3
+* regex-compat
+    License:  BSD3
 * regex-posix
     License:  BSD3
 * relude
