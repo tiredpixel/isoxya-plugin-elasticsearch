@@ -34,6 +34,6 @@ main = do
 
 
 initApp :: URI -> N.Conn -> SnapletInit App App
-initApp u n = makeSnaplet "app" "Isoxya plugin: Elasticsearch" Nothing $ do
+initApp u n = makeSnaplet "App" "" Nothing $ do
     elasticsearch' <- nestSnaplet "" elasticsearch $ initElasticsearch u n
     return $ App elasticsearch'

@@ -15,10 +15,9 @@ import qualified TPX.Com.Net                      as N
 
 
 initElasticsearch :: URI -> N.Conn -> SnapletInit b Elasticsearch
-initElasticsearch u n =
-    makeSnaplet "elasticsearch" "Isoxya plugin: Elasticsearch" Nothing $ do
-        addRoutes routesElasticsearch
-        return $ Elasticsearch u n
+initElasticsearch u n = makeSnaplet "Elasticsearch" "" Nothing $ do
+    addRoutes routesElasticsearch
+    return $ Elasticsearch u n
 
 routesElasticsearch :: [(ByteString, Handler b Elasticsearch ())]
 routesElasticsearch = [
