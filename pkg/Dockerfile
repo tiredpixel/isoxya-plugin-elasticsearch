@@ -21,13 +21,11 @@ USER ${USER}
 
 WORKDIR ${HOME}
 
-ENV PATH=${HOME}/bin:$PATH \
-    ADDRESS=localhost \
-    PORT=8000
+ENV PATH=${HOME}/bin:$PATH
 
-CMD isx-plug-elasticsearch -b ${ADDRESS} -p ${PORT}
+CMD ["isx-plug-elasticsearch", "-b", "localhost", "-p", "8000"]
 
-EXPOSE ${PORT}
+EXPOSE 8000
 
-HEALTHCHECK CMD curl -fs http://${ADDRESS}:${PORT} || false
+HEALTHCHECK CMD curl -fs http://localhost:8000 || false
 #===============================================================================

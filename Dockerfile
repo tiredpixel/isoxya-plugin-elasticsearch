@@ -31,13 +31,12 @@ COPY --chown=x:x [ \
 RUN cabal v1-update && \
     cabal v1-install -j --only-dependencies --enable-tests
 #-------------------------------------------------------------------------------
-ENV PATH=${HOME}/.cabal/bin:$PATH \
-    ADDRESS=0.0.0.0 \
-    PORT=8000
+ENV PATH=${HOME}/.cabal/bin:$PATH
 
-CMD cabal v1-run isx-plug-elasticsearch -- -b ${ADDRESS} -p ${PORT}
+CMD ["cabal", "v1-run", "isx-plug-elasticsearch", "--", \
+    "-b", "0.0.0.0", "-p", "8000"]
 
-EXPOSE ${PORT}
+EXPOSE 8000
 
-HEALTHCHECK CMD curl -fs http://${ADDRESS}:${PORT} || false
+HEALTHCHECK CMD curl -fs http://0.0.0.0:8000 || false
 #===============================================================================
