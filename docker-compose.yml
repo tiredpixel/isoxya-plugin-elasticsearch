@@ -2,6 +2,7 @@ version: "2.4"
 services:
   plug_elasticsearch:
     image: docker.package.tiredpixel.com/isoxya/isoxya-plugin-elasticsearch-build:head
+    init: true
     volumes:
       - ./dist:/home/x/repo/dist
       - ./lib:/home/x/repo/lib
