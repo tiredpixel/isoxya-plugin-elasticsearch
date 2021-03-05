@@ -4,6 +4,7 @@
 module Main (main) where
 
 
+import           Control.Concurrent           (forkIO)
 import           Control.Lens                 (makeLenses)
 import           Data.Version                 (showVersion)
 import           ISX.Plug.Elasticsearch
@@ -27,8 +28,10 @@ main = do
     hPutStrLn stderr $ toString ver
     Just u <- parseAbsoluteURI . fromMaybe uDef <$>
         lookupEnv "ELASTICSEARCH_HOST"
-    n <- N.openConn
-    serveSnaplet snapCfg $ initApp u n
+    tId <- forkIO $ do
+        n <- N.openConn
+        serveSnaplet snapCfg $ initApp u n
+    snapWait tId
     where
         uDef = "http://elastic:password@es:9200"
 
