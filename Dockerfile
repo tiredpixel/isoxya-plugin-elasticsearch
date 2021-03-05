@@ -31,7 +31,8 @@ COPY --chown=x:x [ \
 RUN cabal v1-update && \
     cabal v1-install -j --only-dependencies --enable-tests
 #-------------------------------------------------------------------------------
-ENV PATH=${HOME}/.cabal/bin:$PATH
+ENV PATH=${HOME}/.cabal/bin:$PATH \
+    LANG=C.UTF-8
 
 CMD ["cabal", "v1-run", "isx-plug-elasticsearch", "--", \
     "-b", "0.0.0.0", "-p", "8000"]

@@ -21,7 +21,8 @@ USER ${USER}
 
 WORKDIR ${HOME}
 
-ENV PATH=${HOME}/bin:$PATH
+ENV PATH=${HOME}/bin:$PATH \
+    LANG=C.UTF-8
 
 CMD ["isx-plug-elasticsearch", "-b", "localhost", "-p", "8000"]
 
