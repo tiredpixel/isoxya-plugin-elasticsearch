@@ -25,7 +25,7 @@ makeLenses ''App
 main :: IO ()
 main = do
     let ver = toText $ showVersion version
-    hPutStrLn stderr $ toString ver
+    hPutStrLn stderr $ "Isoxya plugin: Elasticsearch " <> toString ver
     Just u <- parseAbsoluteURI . fromMaybe uDef <$>
         lookupEnv "ELASTICSEARCH_HOST"
     tId <- forkIO $ do
