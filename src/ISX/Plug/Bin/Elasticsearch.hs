@@ -13,8 +13,8 @@ import           Paths_isx_plug_elasticsearch (version)
 import           Snap.Snaplet
 import           System.Environment           (lookupEnv)
 import           System.IO
-import           TPX.Com.Snap.CoreUtils
 import qualified TPX.Com.Net                  as N
+import qualified TPX.Com.Snap.Main            as S
 
 
 newtype App = App {
@@ -28,10 +28,11 @@ main = do
     hPutStrLn stderr $ "Isoxya plugin: Elasticsearch " <> toString ver
     Just u <- parseAbsoluteURI . fromMaybe uDef <$>
         lookupEnv "ELASTICSEARCH_HOST"
+    done <- S.init
     tId <- forkIO $ do
         n <- N.openConn
-        serveSnaplet snapCfg $ initApp u n
-    snapWait tId
+        serveSnaplet S.config $ initApp u n
+    S.wait done tId
     where
         uDef = "http://elastic:password@es:9200"
 

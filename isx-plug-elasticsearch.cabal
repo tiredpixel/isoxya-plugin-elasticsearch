@@ -28,6 +28,7 @@ library lib-common-ce
         TPX.Com.Isoxya.Snap.PlugStrm
         TPX.Com.Net
         TPX.Com.Snap.CoreUtils
+        TPX.Com.Snap.Main
         TPX.Com.URI
     other-modules:
         TPX.Com.Cursor
