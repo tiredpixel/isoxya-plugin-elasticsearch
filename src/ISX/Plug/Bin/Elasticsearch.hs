@@ -11,7 +11,6 @@ import           ISX.Plug.Elasticsearch
 import           Network.URI
 import           Paths_isx_plug_elasticsearch (version)
 import           Snap.Snaplet
-import           System.Environment           (lookupEnv)
 import           System.IO
 import qualified TPX.Com.Net                  as N
 import qualified TPX.Com.Snap.Main            as S

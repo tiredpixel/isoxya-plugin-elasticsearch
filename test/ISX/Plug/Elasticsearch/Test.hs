@@ -12,7 +12,6 @@ import           Data.Time.Clock             (UTCTime)
 import           ISX.Plug.Elasticsearch
 import           ISX.Plug.Elasticsearch.Core hiding (addHeader, setContentType, setHeader, (.=))
 import           Network.URI
-import           System.Environment          (lookupEnv)
 import           System.IO                   hiding (print)
 import           TPX.Com.Isoxya.PlugStrm
 import           TPX.Com.Snap.Test
