@@ -1,5 +1,2 @@
-# Base
-/docker-compose*.yml
-
-# Haskell
 /dist/
+/docker-compose*.yml

@@ -1,4 +1,3 @@
-#===============================================================================
 # FROMFREEZE docker.io/library/haskell:8.8
 FROM docker.io/library/haskell@sha256:b6ef32c8805ef8601db1c90fae177c9b8c069fb992660ebc5c2eaae1e71b8ce4
 
@@ -34,10 +33,9 @@ RUN cabal v1-update && \
 ENV PATH=${HOME}/.cabal/bin:$PATH \
     LANG=C.UTF-8
 
-CMD ["cabal", "v1-run", "isx-plug-elasticsearch", "--", \
+CMD ["cabal", "v1-run", "isoxya-plugin-elasticsearch", "--", \
     "-b", "0.0.0.0", "-p", "8000"]
 
 EXPOSE 8000
 
 HEALTHCHECK CMD curl -fs http://localhost:8000 || false
-#===============================================================================

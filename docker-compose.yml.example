@@ -1,34 +1,30 @@
 version: "2.4"
 services:
-  #-----------------------------------------------------------------------------
-  plug:
+  plugin:
     image: docker.io/tiredpixel/isoxya-plugin-elasticsearch.build:unstable
     init: true
     volumes:
+      - ./isoxya-plugin-elasticsearch.cabal:/home/x/repo/isoxya-plugin-elasticsearch.cabal
       - ./lib:/home/x/repo/lib
       - ./src:/home/x/repo/src
       - ./test:/home/x/repo/test
-      #
-      - ./isx-plug-elasticsearch.cabal:/home/x/repo/isx-plug-elasticsearch.cabal
     networks:
       es: {}
-      plug:
+      plugin:
         aliases:
-          - elasticsearch.plugin.dev.isoxya.com
+          - isoxya-plugin-elasticsearch.localhost
       test: {}
     restart: on-failure
-  #-----------------------------------------------------------------------------
   test_echo:
     image: docker.io/keisato/http-echo:latest
     networks:
       - test
     restart: on-failure
-  #-----------------------------------------------------------------------------
 networks:
   es:
     external: true
     name: isoxya_es
-  plug:
+  plugin:
     external: true
-    name: isoxya_plug
+    name: isoxya_plugin
   test: {}
