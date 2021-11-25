@@ -1,5 +1,5 @@
-# FROMFREEZE docker.io/library/haskell:8.8
-FROM docker.io/library/haskell@sha256:b6ef32c8805ef8601db1c90fae177c9b8c069fb992660ebc5c2eaae1e71b8ce4
+# FROMFREEZE docker.io/library/haskell:8.10
+FROM docker.io/library/haskell@sha256:82ac8f76e8608ac4f99adf3f9464b4a005469978c343141d74e6fb173879a8f8
 
 ARG USER=x
 ARG HOME=/home/x
@@ -27,13 +27,13 @@ COPY --chown=x:x [ \
     "*.cabal", \
     "./"]
 
-RUN cabal v1-update && \
-    cabal v1-install -j --only-dependencies --enable-tests
+RUN cabal update && \
+    cabal build --only-dependencies --enable-tests
 #-------------------------------------------------------------------------------
 ENV PATH=${HOME}/.cabal/bin:$PATH \
     LANG=C.UTF-8
 
-CMD ["cabal", "v1-run", "isoxya-plugin-elasticsearch", "--", \
+CMD ["cabal", "run", "isoxya-plugin-elasticsearch", "--", \
     "-b", "0.0.0.0", "-p", "8000"]
 
 EXPOSE 8000
