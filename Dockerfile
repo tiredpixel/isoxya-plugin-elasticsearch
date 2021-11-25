@@ -23,7 +23,7 @@ USER ${USER}
 WORKDIR ${HOME}/repo
 
 COPY --chown=x:x [ \
-    "cabal.config", \
+    "cabal.project.freeze", \
     "*.cabal", \
     "./"]
 
