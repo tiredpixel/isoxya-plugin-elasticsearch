@@ -1,25 +1,24 @@
-module ISX.Plug.Elasticsearch.Zone.Data (
+module Isoxya.Plugin.Elasticsearch.Endpoint.Data (
     create,
     ) where
 
 
 import           Control.Lens
 import           Data.Aeson.Lens
-import           Data.Scientific              (scientific)
+import           Data.Scientific                        (scientific)
 import           Data.Time.Clock
-import           ISX.Plug.Elasticsearch.Core  hiding (formatTime)
+import           Isoxya.Plugin.Elasticsearch.Core       hiding (formatTime)
 import           Network.URI
-import           TPX.Com.Isoxya.PlugStrm
-import           TPX.Com.Isoxya.Snap.PlugStrm ()
-import           TPX.Com.URI
-import qualified Crypto.Hash                  as Hash
-import qualified Data.ByteString.Lazy.Char8   as C8
-import qualified Data.Text                    as T
-import qualified Data.Time.Format             as Time
-import qualified Data.Vector                  as V
-import qualified Network.HTTP.Conduit         as HTTP
-import qualified Network.HTTP.Types.Status    as HTTP
-import qualified TPX.Com.Net                  as N
+import           TiredPixel.Common.Isoxya.Snap.Streamer ()
+import           TiredPixel.Common.Isoxya.Streamer
+import           TiredPixel.Common.URI
+import qualified Crypto.Hash                            as Hash
+import qualified Data.ByteString.Lazy.Char8             as C8
+import qualified Data.Time.Format                       as Time
+import qualified Data.Vector                            as V
+import qualified Network.HTTP.Conduit                   as HTTP
+import qualified Network.HTTP.Types.Status              as HTTP
+import qualified TiredPixel.Common.Net                  as N
 
 
 create :: Handler b Elasticsearch ()
@@ -47,31 +46,30 @@ create = do
         reqLim = 2097152 -- 2 MB = (1 + .5) * (4/3) MB
 
 
-convStrm :: PlugStrm -> [PlugStrm]
+convStrm :: Streamer -> [Streamer]
 convStrm strm = if null r then rDef else r
     where
         datSpellchecker = [mergeObject result $ object [
                 ("paragraph", String $ datum ^. key "paragraph" . _String)] |
-            datum  <- V.toList $ plugStrmData strm ^. _Array,
+            datum  <- V.toList $ streamerData strm ^. _Array,
             result <- V.toList $ datum ^. key "results" . _Array]
-        r = case plugStrmPlugProcTag strm of
+        r = case streamerProcessorTag strm of
             "spellchecker" -> [strm {
-                plugStrmData = datum} | datum <- datSpellchecker]
+                streamerData = datum} | datum <- datSpellchecker]
             _ -> rDef
         rDef = [strm]
 
-dId :: PlugStrm -> Integer -> Text
+dId :: Streamer -> Integer -> Text
 dId strm i = show _idh <> "." <> show i
     where
-        _idh = hash (plugStrmCrwlHref strm <> "|" <>
-            show (unURIAbsolute $ plugStrmURL strm) <> "|" <>
-            plugStrmPlugProcHref strm)
+        _idh = hash (streamerCrawlHref strm <> "|" <>
+            show (unURIAbsolute $ streamerURL strm) <> "|" <>
+            streamerProcessorHref strm)
 
-dIndex :: PlugStrm -> Maybe Text
+dIndex :: Streamer -> Maybe Text
 dIndex strm = do
-    org <- unOrgHref $ plugStrmOrgHref strm
-    let time = plugStrmCrwlTBegin strm
-    return $ _ns <> _sep <> org <> _sep <> formatTime time
+    let time = streamerCrawlBegan strm
+    return $ _ns <> _sep <> formatTime time
     where
         _sep = "."
         _ns = "isoxya" :: Text
@@ -82,7 +80,7 @@ formatTime = toText . Time.formatTime Time.defaultTimeLocale "%F"
 hash :: Text -> Hash.Digest Hash.SHA256
 hash t = Hash.hash (encodeUtf8 t :: ByteString)
 
-jAction :: PlugStrm -> Integer -> Maybe Value
+jAction :: Streamer -> Integer -> Maybe Value
 jAction strm i = do
     dIndex' <- dIndex strm
     return $ object [
@@ -96,17 +94,12 @@ jDataMeta i n = object [
     ("data_n", Number $ scientific n 0)]
 
 -- ES throws errors when importing keys with types different to those already
--- auto-detected. Thus, we append the PlugProc tag as a suffix to the key. The
+-- auto-detected. Thus, we append the Processor tag as a suffix to the key. The
 -- way of doing this here is hacky, and there is surely a better way -- perhaps
 -- using lenses better, or maybe avoiding this whole approach and instead
 -- handling it at the ToJSON instance level.
 jDataNS :: Value -> Value
 jDataNS j = mergeObject j $ object [
-    ("data." <> j ^. key "plug_proc" . key "tag" . _String,
+    ("data." <> j ^. key "processor" . key "tag" . _String,
         Object $ j ^. key "data" . _Object),
     ("data", Null)]
-
-unOrgHref :: Text -> Maybe Text
-unOrgHref h = do
-    ["", "org", o] <- return $ T.splitOn "/" h
-    return o

@@ -18,7 +18,7 @@ https://github.com/isoxya/isoxya-plugin-elasticsearch
   `9c8100c7642a06acc892c9696e55789ec0dd67ad0dee06a5c378343b5e47a969.1`
 
 - one-to-many support for crawled pages which result in multiple documents, based on plugin tag
-  `plug_proc.tag: spellchecker`
+  `processor.tag: spellchecker`
 
 - document metadata for position within sequence
   `data_i`, `data_n`
@@ -28,7 +28,7 @@ https://github.com/isoxya/isoxya-plugin-elasticsearch
 
 ### Auth
 
-- create role `isx_plug_elasticsearch`
+- create role `isoxya_plugin_elasticsearch`
   - Index privileges
     - Indices
       - `isoxya.*`
@@ -36,9 +36,9 @@ https://github.com/isoxya/isoxya-plugin-elasticsearch
       - `index`
       - `create_index`
 
-- create user `isx_dev_plug_elasticsearch`
+- create user `isoxya_plugin_elasticsearch_dev`
   - Roles
-    - `isx_plug_elasticsearch`
+    - `isoxya_plugin_elasticsearch`
 
 - set in `ELASTICSEARCH_HOST` using HTTP Basic Auth (`eg_user:PASSWORD@`)
 
@@ -49,7 +49,7 @@ https://github.com/isoxya/isoxya-plugin-elasticsearch
     - Index Patterns
       - Create Index Pattern
         - Index Pattern: `isoxya.*`
-        - Time Filter Field: `t_retrieval`
+        - Time Filter Field: `retrieved`
 
 
 ## Contact

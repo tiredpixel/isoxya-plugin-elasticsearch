@@ -1,7 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 
 
-module ISX.Plug.Elasticsearch.Resource (
+module Isoxya.Plugin.Elasticsearch.Resource (
     Apex(..),
     ESBulkRes(..),
     ) where
@@ -12,12 +12,12 @@ import Data.Time.Clock
 
 
 data Apex = Apex {
-    apexTNow    :: UTCTime,
+    apexNow     :: UTCTime,
     apexVersion :: Text
     } deriving (Show)
 instance ToJSON Apex where
     toJSON Apex{..} = object [
-        "t_now"   .= apexTNow,
+        "now"     .= apexNow,
         "version" .= apexVersion]
 
 newtype ESBulkRes = ESBulkRes {

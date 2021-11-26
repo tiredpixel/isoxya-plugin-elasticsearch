@@ -21,9 +21,7 @@ services:
       - test
     restart: on-failure
 networks:
-  es:
-    external: true
-    name: isoxya_es
+  es: {}
   plugin:
     external: true
     name: isoxya_plugin
