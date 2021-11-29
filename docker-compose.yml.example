@@ -1,6 +1,6 @@
 version: "2.4"
 services:
-  plugin:
+  plugin_elasticsearch:
     image: docker.io/tiredpixel/isoxya-plugin-elasticsearch.build:unstable
     init: true
     volumes:
@@ -22,7 +22,5 @@ services:
     restart: on-failure
 networks:
   es: {}
-  plugin:
-    external: true
-    name: isoxya_plugin
+  plugin: {}
   test: {}
