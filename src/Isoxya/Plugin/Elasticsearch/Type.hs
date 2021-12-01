@@ -2,7 +2,7 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 
-module Isoxya.Plugin.Elasticsearch.Types (
+module Isoxya.Plugin.Elasticsearch.Type (
     Elasticsearch(..),
     ) where
 

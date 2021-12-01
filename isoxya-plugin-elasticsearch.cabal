@@ -51,7 +51,7 @@ library lib-common
         TiredPixel.Common.Isoxya.Snap.Streamer
         TiredPixel.Common.Isoxya.Streamer
         TiredPixel.Common.Net
-        TiredPixel.Common.Snap.CoreUtils
+        TiredPixel.Common.Snap.CoreUtil
         TiredPixel.Common.Snap.Main
         TiredPixel.Common.URI
     other-modules:
@@ -86,7 +86,7 @@ library lib-isoxya-plugin-elasticsearch
         Isoxya.Plugin.Elasticsearch.Endpoint.Data
         Isoxya.Plugin.Elasticsearch.Init
         Isoxya.Plugin.Elasticsearch.Resource
-        Isoxya.Plugin.Elasticsearch.Types
+        Isoxya.Plugin.Elasticsearch.Type
         Paths_isoxya_plugin_elasticsearch
     build-depends:
         aeson,
@@ -127,7 +127,7 @@ library lib-common-test
     exposed-modules:
         TiredPixel.Common.Snap.Test
     other-modules:
-        TiredPixel.Common.Snap.TestUtils
+        TiredPixel.Common.Snap.TestUtil
     build-depends:
         aeson,
         base64-bytestring,
