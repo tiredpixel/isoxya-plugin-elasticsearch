@@ -8,8 +8,8 @@ https://github.com/isoxya/isoxya-plugin-elasticsearch
 
 ## Features
 
-- index auto-creation using organisation and date
-  `isoxya.f9b4a163-36a8-4b25-8958-d58e52a1a5bd.2019-05-01`
+- index auto-creation using date
+  `isoxya.2021-12-02`
 
 - insert using [Elasticsearch Bulk API](https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html)
   `Content-Type: application/x-ndjson`
