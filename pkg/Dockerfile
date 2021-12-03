@@ -23,7 +23,7 @@ WORKDIR ${HOME}
 ENV PATH=${HOME}/bin:$PATH \
     LANG=C.UTF-8
 
-CMD ["isoxya-plugin-elasticsearch", "-b", "localhost", "-p", "8000"]
+CMD ["isoxya-plugin-elasticsearch", "-b", "0.0.0.0", "-p", "8000"]
 
 EXPOSE 8000
 
