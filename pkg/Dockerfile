@@ -23,8 +23,8 @@ WORKDIR ${HOME}
 ENV PATH=${HOME}/bin:$PATH \
     LANG=C.UTF-8
 
-CMD ["isoxya-plugin-elasticsearch", "-b", "0.0.0.0", "-p", "8000"]
+CMD ["isoxya-plugin-elasticsearch", "-b", "0.0.0.0", "-p", "80"]
 
-EXPOSE 8000
+EXPOSE 80
 
-HEALTHCHECK CMD curl -fs http://localhost:8000 || false
+HEALTHCHECK CMD curl -fs http://localhost || false
