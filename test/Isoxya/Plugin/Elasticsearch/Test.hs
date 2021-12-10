@@ -54,7 +54,7 @@ fxExt url = if T.takeEnd 1 url == "/"
     else url
 
 initElasticsearchTest :: SnapletInit b Elasticsearch
-initElasticsearchTest = makeSnaplet "API" "" Nothing $ do
+initElasticsearchTest = makeSnaplet "Elasticsearch" "" Nothing $ do
     uE <- liftIO $ lookupEnv "ELASTICSEARCH_HOST"
     let Just u = parseAbsoluteURI $ fromMaybe uDef uE
     n <- liftIO N.openConn
