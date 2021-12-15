@@ -10,7 +10,7 @@ services:
       - ./test:/home/x/repo/test
     networks:
       es: {}
-      plugin:
+      streamer:
         aliases:
           - isoxya-plugin-elasticsearch.localhost
       test: {}
@@ -44,5 +44,5 @@ volumes:
   es: {}
 networks:
   es: {}
-  plugin: {}
+  streamer: {}
   test: {}
