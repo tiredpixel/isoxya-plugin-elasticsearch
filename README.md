@@ -24,6 +24,27 @@ https://github.com/isoxya/isoxya-plugin-elasticsearch
   `data_i`, `data_n`
 
 
+## Installation
+
+Choose a stream: `stable` (recommended), `testing`, or `unstable`:
+
+```sh
+cd misc/streams/stable/
+```
+
+Copy environment variables:
+
+```sh
+cp .env.example .env
+```
+
+Boot the stack:
+
+```sh
+docker-compose up
+```
+
+
 ## Setup (Elastic Stack)
 
 ### Auth

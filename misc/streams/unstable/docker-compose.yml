@@ -1,0 +1,40 @@
+version: "2.4"
+services:
+  plugin_elasticsearch:
+    image: docker.io/isoxya/isoxya-plugin-elasticsearch:unstable
+    init: true
+    networks:
+      es: {}
+      streamer:
+        aliases:
+          - isoxya-plugin-elasticsearch.localhost
+    restart: on-failure
+    depends_on:
+      - es
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.0
+    volumes:
+      - es:/usr/share/elasticsearch/data
+    networks:
+      - es
+    restart: on-failure
+    environment:
+      discovery.type: single-node
+  kib:
+    image: docker.elastic.co/kibana/kibana:7.16.0
+    networks:
+      - es
+    ports:
+      - 0.0.0.0:5601:5601
+    restart: on-failure
+    depends_on:
+      - es
+    environment:
+      ELASTICSEARCH_HOSTS: http://es:9200
+      SERVER_HOST: 0.0.0.0
+    restart: on-failure
+volumes:
+  es: {}
+networks:
+  es: {}
+  streamer: {}
