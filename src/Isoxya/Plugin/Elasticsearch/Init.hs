@@ -9,8 +9,8 @@ import           Network.URI
 import           Snap.Core
 import           Snap.Snaplet
 import           TiredPixel.Common.Snap.CoreUtil
-import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Apex as EA
-import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Data as ED
+import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Apex as Apx
+import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Data as Dat
 import qualified TiredPixel.Common.Net                     as N
 
 
@@ -21,9 +21,9 @@ initElasticsearch u n = makeSnaplet "Elasticsearch" "" Nothing $ do
 
 routesElasticsearch :: [(ByteString, Handler b Elasticsearch ())]
 routesElasticsearch = [
-    ("",        ifTop       EA.apex),
+    ("",        ifTop       Apx.apex),
     --
-    ("data",    method POST ED.create),
+    ("data",    method POST Dat.create),
     ("data/:_",             notFound),
     --
     ("",                    notFound)]

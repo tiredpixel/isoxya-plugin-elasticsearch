@@ -26,14 +26,14 @@ create = do
     u <- gets _up
     n <- gets _net
     let reqURL = relativeTo uPath u
-    req_      <- getBoundedJSON' reqLim >>= validateJSON
-    Just strm <- runValidate req_
-    let strms' = convStrm strm
-    let resultsN = toInteger $ length strms'
+    req_ <- getBoundedJSON' reqLim >>= validateJSON
+    Just str <- runValidate req_
+    let strs' = convertStreamer str
+    let resultsN = toInteger $ length strs'
     let uBody = C8.unlines $ concat [[
-            encode $ jAction strm i,
-            encode $ jDataNS $ mergeObject (toJSON strm') $ jDataMeta i resultsN
-            ] | (i, strm') <- zip [1..] strms']
+            encode $ jAction str i,
+            encode $ jDataNS $ mergeObject (toJSON str') $ jDataMeta i resultsN
+            ] | (i, str') <- zip [1..] strs']
     let uReq = N.jsonNDReq $ N.makeReq "POST" reqURL uBody
     uRes <- liftIO $ N.makeRes uReq n
     let rx_ = decode $ HTTP.responseBody uRes :: Maybe ESBulkRes
@@ -46,29 +46,29 @@ create = do
         reqLim = 2097152 -- 2 MB = (1 + .5) * (4/3) MB
 
 
-convStrm :: Streamer -> [Streamer]
-convStrm strm = if null r then rDef else r
+convertStreamer :: Streamer -> [Streamer]
+convertStreamer str = if null r then rDef else r
     where
         datSpellchecker = [mergeObject result $ object [
                 ("paragraph", String $ datum ^. key "paragraph" . _String)] |
-            datum  <- V.toList $ streamerData strm ^. _Array,
+            datum  <- V.toList $ streamerData str ^. _Array,
             result <- V.toList $ datum ^. key "results" . _Array]
-        r = case streamerProcessorTag strm of
-            "spellchecker" -> [strm {
+        r = case streamerProcessorTag str of
+            "spellchecker" -> [str {
                 streamerData = datum} | datum <- datSpellchecker]
             _ -> rDef
-        rDef = [strm]
+        rDef = [str]
 
 dId :: Streamer -> Integer -> Text
-dId strm i = show _idh <> "." <> show i
+dId str i = show _idh <> "." <> show i
     where
-        _idh = hash (streamerCrawlHref strm <> "|" <>
-            show (unURIAbsolute $ streamerURL strm) <> "|" <>
-            streamerProcessorHref strm)
+        _idh = hash (streamerCrawlHref str <> "|" <>
+            show (unURIAbsolute $ streamerURL str) <> "|" <>
+            streamerProcessorHref str)
 
 dIndex :: Streamer -> Maybe Text
-dIndex strm = do
-    let time = streamerCrawlBegan strm
+dIndex str = do
+    let time = streamerCrawlBegan str
     return $ _ns <> _sep <> formatTime time
     where
         _sep = "."
@@ -81,12 +81,12 @@ hash :: Text -> Hash.Digest Hash.SHA256
 hash t = Hash.hash (encodeUtf8 t :: ByteString)
 
 jAction :: Streamer -> Integer -> Maybe Value
-jAction strm i = do
-    dIndex' <- dIndex strm
+jAction str i = do
+    dIndex' <- dIndex str
     return $ object [
         ("index", object [
             ("_index", String dIndex'),
-            ("_id", String $ dId strm i)])]
+            ("_id", String $ dId str i)])]
 
 jDataMeta :: Integer -> Integer -> Value
 jDataMeta i n = object [

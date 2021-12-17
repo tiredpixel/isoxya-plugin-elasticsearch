@@ -12,5 +12,6 @@ import Paths_isoxya_plugin_elasticsearch (version)
 apex :: Handler b Elasticsearch ()
 apex = do
     t <- liftIO getCurrentTime
-    let v = toText $ showVersion version
-    writeJSON $ Apex t v
+    writeJSON $ Apex t ver
+    where
+        ver = toText $ showVersion version

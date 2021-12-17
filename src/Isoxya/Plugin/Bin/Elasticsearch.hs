@@ -23,8 +23,7 @@ makeLenses ''App
 
 main :: IO ()
 main = do
-    let ver = toText $ showVersion version
-    hPutStrLn stderr $ "Isoxya Elasticsearch plugin " <> toString ver
+    hPutStrLn stderr $ "Isoxya plugin Elasticsearch " <> toString ver
     Just u <- parseAbsoluteURI . fromMaybe uDef <$>
         lookupEnv "ELASTICSEARCH_HOST"
     done <- S.init
@@ -34,6 +33,7 @@ main = do
     S.wait done tId
     where
         uDef = "http://elastic:password@es:9200"
+        ver = toText $ showVersion version
 
 
 initApp :: URI -> N.Conn -> SnapletInit App App
