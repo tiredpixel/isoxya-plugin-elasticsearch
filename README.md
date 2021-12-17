@@ -1,6 +1,6 @@
-# Isoxya Elasticsearch plugin
+# Isoxya plugin Elasticsearch
 
-Isoxya Elasticsearch plugin streams data into an [Elasticsearch](https://www.elastic.co/elasticsearch/) cluster, making it possible to query data using the advanced reporting features of Elasticsearch and [Kibana](https://www.elastic.co/kibana). It is a plugin for [Isoxya](https://www.isoxya.com/) web crawler.
+Isoxya plugin Elasticsearch streams data into an [Elasticsearch](https://www.elastic.co/elasticsearch/) cluster, making it possible to query data using the advanced reporting features of Elasticsearch and [Kibana](https://www.elastic.co/kibana). It is a plugin for [Isoxya](https://www.isoxya.com/) web crawler.
 
 https://hub.docker.com/r/isoxya/isoxya-plugin-elasticsearch  
 https://github.com/isoxya/isoxya-plugin-elasticsearch  
@@ -30,12 +30,6 @@ Choose a stream: `stable` (recommended), `testing`, or `unstable`:
 
 ```sh
 cd misc/streams/stable/
-```
-
-Copy environment variables:
-
-```sh
-cp .env.example .env
 ```
 
 Boot the stack:

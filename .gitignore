@@ -2,4 +2,3 @@
 /dist-newstyle/
 /dist/
 /docker-compose*.yml
-/misc/streams/*/*.env
