@@ -27,6 +27,7 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms128m -Xmx128m
       discovery.type: single-node
+      xpack.security.enabled: 'false'
   kib:
     image: docker.elastic.co/kibana/kibana:7.16.3
     networks:
