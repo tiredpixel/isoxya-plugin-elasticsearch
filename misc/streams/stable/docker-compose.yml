@@ -19,6 +19,7 @@ services:
       - es
     restart: on-failure
     environment:
+      ES_JAVA_OPTS: -Xms128m -Xmx128m
       discovery.type: single-node
   kib:
     image: docker.elastic.co/kibana/kibana:7.16.3
