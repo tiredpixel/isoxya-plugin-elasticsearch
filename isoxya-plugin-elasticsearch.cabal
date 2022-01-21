@@ -1,15 +1,14 @@
 cabal-version:          3.0
-name:                   isx-plug-elasticsearch
+name:                   isoxya-plugin-elasticsearch
 version:                0.0.0
-synopsis:               Isoxya plugin: Elasticsearch
+synopsis:               Isoxya plugin Elasticsearch
 license:                BSD-3-Clause
 author:                 Nic Williams <tp@tiredpixel.com>
 maintainer:             Nic Williams <tp@tiredpixel.com>
-build-type:             Simple
 --------------------------------------------------------------------------------
 common common-properties
     build-depends:
-        base                            ==  4.13.*,
+        base                            ^>= 4.14.3.0,
         relude
     mixins:
         base                            hiding (Prelude),
@@ -19,19 +18,45 @@ common common-properties
         OverloadedStrings
     ghc-options:
         -Wall
-        -ddump-minimal-imports
+        -Werror
+        -Wunused-packages
 --------------------------------------------------------------------------------
-library lib-common-ce
+-- HACK: hspec-snap 1.0.2.0 breaks on Haskell 8.10, base 4.14.3.0
+library hspec-snap
+    exposed-modules:
+        Test.Hspec.Snap
+    build-depends:
+                   base                     >= 4.6      && < 4.15
+                 , aeson                    >= 0.6      && < 1.5
+                 , bytestring               >= 0.9      && < 0.11
+                 , containers               >= 0.4      && < 0.7
+                 , digestive-functors       >= 0.7      && < 0.9
+                 , hspec                    >= 2.2      && < 2.8
+                 , hspec-core               >= 2.2      && < 2.8
+                 , HUnit                    >= 1.5      && < 1.7
+                 , hxt                      >= 9.3      && < 9.4
+                 , HandsomeSoup             >= 0.3      && < 0.5
+                 , lens                     >= 3.10     && < 5
+                 , mtl                      >= 2        && < 3
+                 , snap                     >= 1.0      && < 1.2
+                 , snap-core                >= 1.0      && < 1.2
+                 , text                     >= 0.11     && < 1.3
+                 , transformers             >= 0.3      && < 0.6
+    hs-source-dirs:
+        lib/hspec-snap/src
+    default-language:   Haskell2010
+--------------------------------------------------------------------------------
+library lib-common
     import:             common-properties
     exposed-modules:
-        TPX.Com.Isoxya.PlugStrm
-        TPX.Com.Isoxya.Snap.PlugStrm
-        TPX.Com.Net
-        TPX.Com.Snap.CoreUtils
-        TPX.Com.Snap.Main
-        TPX.Com.URI
+        TiredPixel.Common.Isoxya.Snap.Streamer
+        TiredPixel.Common.Isoxya.Streamer
+        TiredPixel.Common.Net
+        TiredPixel.Common.Snap.CoreUtil
+        TiredPixel.Common.Snap.Main
+        TiredPixel.Common.URI
     other-modules:
-        TPX.Com.Cursor
+        TiredPixel.Common.Cursor
     build-depends:
         aeson,
         bytestring,
@@ -50,24 +75,21 @@ library lib-common-ce
         unix,
         unordered-containers,
     hs-source-dirs:
-        lib/common-ce/src
+        lib/common/src
 --------------------------------------------------------------------------------
-library lib-isx-plug-elasticsearch
+library lib-isoxya-plugin-elasticsearch
     import:             common-properties
     exposed-modules:
-        ISX.Plug.Elasticsearch
-        ISX.Plug.Elasticsearch.Core
+        Isoxya.Plugin.Elasticsearch
+        Isoxya.Plugin.Elasticsearch.Core
     other-modules:
-        Paths_isx_plug_elasticsearch
-        --
-        ISX.Plug.Elasticsearch.Init
-        ISX.Plug.Elasticsearch.Resource
-        ISX.Plug.Elasticsearch.Types
-        ISX.Plug.Elasticsearch.Zone.Apex
-        ISX.Plug.Elasticsearch.Zone.Data
+        Isoxya.Plugin.Elasticsearch.Endpoint.Apex
+        Isoxya.Plugin.Elasticsearch.Endpoint.Data
+        Isoxya.Plugin.Elasticsearch.Init
+        Isoxya.Plugin.Elasticsearch.Resource
+        Isoxya.Plugin.Elasticsearch.Type
+        Paths_isoxya_plugin_elasticsearch
     build-depends:
-        lib-common-ce,
-        --
         aeson,
         bytestring,
         cryptonite,
@@ -75,6 +97,7 @@ library lib-isx-plug-elasticsearch
         http-types,
         lens,
         lens-aeson,
+        lib-common,
         network-uri,
         scientific,
         snap,
@@ -86,32 +109,27 @@ library lib-isx-plug-elasticsearch
     hs-source-dirs:
         src
 --------------------------------------------------------------------------------
-executable isx-plug-elasticsearch
+executable isoxya-plugin-elasticsearch
     import:             common-properties
     main-is:            Elasticsearch.hs
     other-modules:
-        Paths_isx_plug_elasticsearch
+        Paths_isoxya_plugin_elasticsearch
     build-depends:
-        lib-common-ce,
-        lib-isx-plug-elasticsearch,
-        --
         lens,
+        lib-common,
+        lib-isoxya-plugin-elasticsearch,
         network-uri,
         snap,
     hs-source-dirs:
-        src/ISX/Plug/Bin
-    ghc-options:
-        -threaded
+        src/Isoxya/Plugin/Bin
 --------------------------------------------------------------------------------
-library lib-common-ce-test
+library lib-common-test
     import:             common-properties
     exposed-modules:
-        TPX.Com.Snap.Test
+        TiredPixel.Common.Snap.Test
     other-modules:
-        TPX.Com.Snap.TestUtils
+        TiredPixel.Common.Snap.TestUtil
     build-depends:
-        lib-common-ce,
-        --
         aeson,
         base64-bytestring,
         bytestring,
@@ -132,23 +150,22 @@ library lib-common-ce-test
         unordered-containers,
         vector,
     hs-source-dirs:
-        lib/common-ce/test
+        lib/common/test
 --------------------------------------------------------------------------------
-test-suite test-isx-plug-elasticsearch
+test-suite test-isoxya-plugin-elasticsearch
     import:             common-properties
     type:               exitcode-stdio-1.0
     main-is:            Spec.hs
     other-modules:
-        ISX.Plug.Elasticsearch.Test
-        ISX.Plug.Elasticsearch.Zone.ApexSpec
-        ISX.Plug.Elasticsearch.Zone.DataSpec
+        Isoxya.Plugin.Elasticsearch.Endpoint.ApexSpec
+        Isoxya.Plugin.Elasticsearch.Endpoint.DataSpec
+        Isoxya.Plugin.Elasticsearch.Test
     build-depends:
-        lib-common-ce,
-        lib-common-ce-test,
-        lib-isx-plug-elasticsearch,
-        --
         bytestring,
         hspec                           ==  2.*,
+        lib-common,
+        lib-common-test,
+        lib-isoxya-plugin-elasticsearch,
         network-uri,
         text,
         time,
@@ -158,6 +175,3 @@ test-suite test-isx-plug-elasticsearch
         test
     build-tool-depends:
         hspec-discover:hspec-discover   ==  2.*
-    ghc-options:
-        -threaded
---------------------------------------------------------------------------------

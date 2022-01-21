@@ -2,14 +2,14 @@
 {-# OPTIONS_GHC -Wno-unused-top-binds #-}
 
 
-module ISX.Plug.Elasticsearch.Types (
+module Isoxya.Plugin.Elasticsearch.Type (
     Elasticsearch(..),
     ) where
 
 
 import           Control.Lens (makeLenses)
 import           Network.URI
-import qualified TPX.Com.Net               as N
+import qualified TiredPixel.Common.Net     as N
 
 
 data Elasticsearch = Elasticsearch {

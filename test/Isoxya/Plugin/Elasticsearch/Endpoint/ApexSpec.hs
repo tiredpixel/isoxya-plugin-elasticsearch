@@ -1,7 +1,7 @@
-module ISX.Plug.Elasticsearch.Zone.ApexSpec (spec) where
+module Isoxya.Plugin.Elasticsearch.Endpoint.ApexSpec (spec) where
 
 
-import ISX.Plug.Elasticsearch.Test
+import Isoxya.Plugin.Elasticsearch.Test
 
 
 spec :: Spec
@@ -12,6 +12,6 @@ spec = snapElasticsearch $
             res <- runRequest req
             rspStatus res `shouldBe` 200
             b <- getResponseBody res
-            b ^. key "t_now" . _String `shouldContain` "T"
+            b ^. key "time" . _String `shouldContain` "T"
             b ^. key "version" . _String `shouldBe` "0.0.0"
             b ^. _Object `shouldMeasure` 2

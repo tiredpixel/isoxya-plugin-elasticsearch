@@ -1,9 +1,9 @@
-module ISX.Plug.Elasticsearch.Zone.DataSpec (spec) where
+module Isoxya.Plugin.Elasticsearch.Endpoint.DataSpec (spec) where
 
 
-import           ISX.Plug.Elasticsearch.Test
-import           TPX.Com.Isoxya.PlugStrm
-import qualified Data.ByteString.Lazy.Char8  as C8
+import           Isoxya.Plugin.Elasticsearch.Test
+import           TiredPixel.Common.Isoxya.Streamer
+import qualified Data.ByteString.Lazy.Char8        as C8
 
 
 spec :: Spec
@@ -63,9 +63,9 @@ spec = snapElasticsearch $
             test res dataE
 
 
-load :: MonadIO m => Text -> Text -> Text -> Value -> m (PlugStrm, [Value])
+load :: MonadIO m => Text -> Text -> Text -> Value -> m (Streamer, [Value])
 load url tag sfx dat = do
-    let i = genPlugStrm url tag dat
+    let i = genStreamer url tag dat
     b <- readFileLBS $ fixtureResult url (tag <> sfx)
     let Just dataE = sequence (decode <$> C8.lines b)
     return (i, dataE)

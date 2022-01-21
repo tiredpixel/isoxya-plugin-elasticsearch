@@ -4,16 +4,16 @@
 module Main (main) where
 
 
-import           Control.Concurrent           (forkIO)
-import           Control.Lens                 (makeLenses)
-import           Data.Version                 (showVersion)
-import           ISX.Plug.Elasticsearch
+import           Control.Concurrent                (forkIO)
+import           Control.Lens                      (makeLenses)
+import           Data.Version                      (showVersion)
+import           Isoxya.Plugin.Elasticsearch
 import           Network.URI
-import           Paths_isx_plug_elasticsearch (version)
+import           Paths_isoxya_plugin_elasticsearch (version)
 import           Snap.Snaplet
 import           System.IO
-import qualified TPX.Com.Net                  as N
-import qualified TPX.Com.Snap.Main            as S
+import qualified TiredPixel.Common.Net             as N
+import qualified TiredPixel.Common.Snap.Main       as S
 
 
 newtype App = App {
@@ -23,8 +23,7 @@ makeLenses ''App
 
 main :: IO ()
 main = do
-    let ver = toText $ showVersion version
-    hPutStrLn stderr $ "Isoxya plugin: Elasticsearch " <> toString ver
+    hPutStrLn stderr $ "Isoxya plugin Elasticsearch " <> toString ver
     Just u <- parseAbsoluteURI . fromMaybe uDef <$>
         lookupEnv "ELASTICSEARCH_HOST"
     done <- S.init
@@ -34,6 +33,7 @@ main = do
     S.wait done tId
     where
         uDef = "http://elastic:password@es:9200"
+        ver = toText $ showVersion version
 
 
 initApp :: URI -> N.Conn -> SnapletInit App App
