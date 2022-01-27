@@ -1,7 +1,7 @@
 version: "2.4"
 services:
   plugin_elasticsearch:
-    image: docker.io/isoxya/isoxya-plugin-elasticsearch:unstable
+    image: ghcr.io/isoxya/isoxya-plugin-elasticsearch:unstable
     init: true
     networks:
       es: {}

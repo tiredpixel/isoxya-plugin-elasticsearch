@@ -28,3 +28,5 @@ CMD ["isoxya-plugin-elasticsearch", "-b", "0.0.0.0", "-p", "80"]
 EXPOSE 80
 
 HEALTHCHECK CMD curl -fs http://localhost || false
+
+LABEL org.opencontainers.image.source https://github.com/isoxya/isoxya-plugin-elasticsearch
