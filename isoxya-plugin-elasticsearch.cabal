@@ -137,6 +137,7 @@ test-suite test-isoxya-plugin-elasticsearch
         Isoxya.Plugin.Elasticsearch.Test
     build-depends:
         bytestring,
+        hlint,
         hspec                           ==  2.*,
         lib-common,
         lib-common-test,
