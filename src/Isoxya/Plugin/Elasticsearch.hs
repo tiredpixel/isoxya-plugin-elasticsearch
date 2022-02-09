@@ -4,5 +4,5 @@ module Isoxya.Plugin.Elasticsearch (
     ) where
 
 
-import Isoxya.Plugin.Elasticsearch.Init
-import Isoxya.Plugin.Elasticsearch.Type
+import           Isoxya.Plugin.Elasticsearch.Init
+import           Isoxya.Plugin.Elasticsearch.Type

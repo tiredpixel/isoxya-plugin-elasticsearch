@@ -1,7 +1,7 @@
 module Isoxya.Plugin.Elasticsearch.Endpoint.ApexSpec (spec) where
 
 
-import Isoxya.Plugin.Elasticsearch.Test
+import           Isoxya.Plugin.Elasticsearch.Test
 
 
 spec :: Spec

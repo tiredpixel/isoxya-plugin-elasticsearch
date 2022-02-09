@@ -7,13 +7,14 @@ module Isoxya.Plugin.Elasticsearch.Type (
     ) where
 
 
-import           Control.Lens (makeLenses)
+import           Control.Lens          (makeLenses)
 import           Network.URI
-import qualified TiredPixel.Common.Net     as N
+import qualified TiredPixel.Common.Net as N
 
 
-data Elasticsearch = Elasticsearch {
-    _up  :: URI,
-    _net :: N.Conn}
+data Elasticsearch = Elasticsearch
+                       { _up  :: URI
+                       , _net :: N.Conn
+                       }
 
 makeLenses ''Elasticsearch

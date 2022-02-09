@@ -4,14 +4,14 @@ module Isoxya.Plugin.Elasticsearch.Init (
     ) where
 
 
+import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Apex as Apx
+import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Data as Dat
 import           Isoxya.Plugin.Elasticsearch.Type
 import           Network.URI
 import           Snap.Core
 import           Snap.Snaplet
-import           TiredPixel.Common.Snap.CoreUtil
-import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Apex as Apx
-import qualified Isoxya.Plugin.Elasticsearch.Endpoint.Data as Dat
 import qualified TiredPixel.Common.Net                     as N
+import           TiredPixel.Common.Snap.CoreUtil
 
 
 initElasticsearch :: URI -> N.Conn -> SnapletInit b Elasticsearch

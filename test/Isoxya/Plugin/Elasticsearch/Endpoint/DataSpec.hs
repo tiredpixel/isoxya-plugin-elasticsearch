@@ -1,9 +1,9 @@
 module Isoxya.Plugin.Elasticsearch.Endpoint.DataSpec (spec) where
 
 
+import qualified Data.ByteString.Lazy.Char8        as C8
 import           Isoxya.Plugin.Elasticsearch.Test
 import           TiredPixel.Common.Isoxya.Streamer
-import qualified Data.ByteString.Lazy.Char8        as C8
 
 
 spec :: Spec
@@ -14,7 +14,7 @@ spec = snapElasticsearch $
             let req = postJSON "/data" i
             res <- runRequest req
             test res dataE
-        
+
         it "link-checker => 200" $ do
             (i, dataE) <- load "example.com" "link-checker" "" $ object [
                 ("meta", object [
@@ -22,7 +22,7 @@ spec = snapElasticsearch $
             let req = postJSON "/data" i
             res <- runRequest req
             test res dataE
-        
+
         it "spellchecker => 200" $ do
             (i, dataE) <- load "example.com" "spellchecker" "" $ array [
                 object [
@@ -55,7 +55,7 @@ spec = snapElasticsearch $
             let req = postJSON "/data" i
             res <- runRequest req
             test res dataE
-        
+
         it "spellchecker empty data => 200" $ do
             (i, dataE) <- load "example.com" "spellchecker" "-empty-data" Null
             let req = postJSON "/data" i

@@ -3,10 +3,10 @@ module Isoxya.Plugin.Elasticsearch.Endpoint.Apex (
     ) where
 
 
-import Data.Time.Clock
-import Data.Version                      (showVersion)
-import Isoxya.Plugin.Elasticsearch.Core
-import Paths_isoxya_plugin_elasticsearch (version)
+import           Data.Time.Clock
+import           Data.Version                      (showVersion)
+import           Isoxya.Plugin.Elasticsearch.Core
+import           Paths_isoxya_plugin_elasticsearch (version)
 
 
 apex :: Handler b Elasticsearch ()

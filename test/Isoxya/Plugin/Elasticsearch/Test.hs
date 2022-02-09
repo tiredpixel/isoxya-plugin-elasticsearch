@@ -8,17 +8,19 @@ module Isoxya.Plugin.Elasticsearch.Test (
     ) where
 
 
+import qualified Data.Text                         as T
 import           Data.Time.Clock                   (UTCTime)
+import qualified Data.Time.Format                  as Time
 import           Isoxya.Plugin.Elasticsearch
-import           Isoxya.Plugin.Elasticsearch.Core  hiding (addHeader, setContentType, setHeader, (.=))
+import           Isoxya.Plugin.Elasticsearch.Core  hiding (addHeader,
+                                                    setContentType, setHeader,
+                                                    (.=))
 import           Network.URI
 import           System.IO                         hiding (print)
 import           TiredPixel.Common.Isoxya.Streamer
+import qualified TiredPixel.Common.Net             as N
 import           TiredPixel.Common.Snap.Test
 import           TiredPixel.Common.URI
-import qualified Data.Text                         as T
-import qualified Data.Time.Format                  as Time
-import qualified TiredPixel.Common.Net             as N
 
 
 fixtureResult :: Text -> Text -> FilePath

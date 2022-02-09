@@ -16,8 +16,7 @@ import qualified TiredPixel.Common.Net             as N
 import qualified TiredPixel.Common.Snap.Main       as S
 
 
-newtype App = App {
-    _elasticsearch :: Snaplet Elasticsearch}
+newtype App = App { _elasticsearch :: Snaplet Elasticsearch }
 
 makeLenses ''App
 

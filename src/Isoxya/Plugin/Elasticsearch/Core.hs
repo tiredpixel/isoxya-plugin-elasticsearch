@@ -9,10 +9,10 @@ module Isoxya.Plugin.Elasticsearch.Core (
     ) where
 
 
-import Data.Aeson
-import Isoxya.Plugin.Elasticsearch.Resource
-import Isoxya.Plugin.Elasticsearch.Type
-import Snap.Core                            hiding (pass)
-import Snap.Extras.JSON
-import Snap.Snaplet
-import TiredPixel.Common.Snap.CoreUtil
+import           Data.Aeson
+import           Isoxya.Plugin.Elasticsearch.Resource
+import           Isoxya.Plugin.Elasticsearch.Type
+import           Snap.Core                            hiding (pass)
+import           Snap.Extras.JSON
+import           Snap.Snaplet
+import           TiredPixel.Common.Snap.CoreUtil

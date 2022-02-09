@@ -4,21 +4,21 @@ module Isoxya.Plugin.Elasticsearch.Endpoint.Data (
 
 
 import           Control.Lens
+import qualified Crypto.Hash                            as Hash
 import           Data.Aeson.Lens
+import qualified Data.ByteString.Lazy.Char8             as C8
 import           Data.Scientific                        (scientific)
 import           Data.Time.Clock
+import qualified Data.Time.Format                       as Time
+import qualified Data.Vector                            as V
 import           Isoxya.Plugin.Elasticsearch.Core       hiding (formatTime)
+import qualified Network.HTTP.Conduit                   as HTTP
+import qualified Network.HTTP.Types.Status              as HTTP
 import           Network.URI
 import           TiredPixel.Common.Isoxya.Snap.Streamer ()
 import           TiredPixel.Common.Isoxya.Streamer
-import           TiredPixel.Common.URI
-import qualified Crypto.Hash                            as Hash
-import qualified Data.ByteString.Lazy.Char8             as C8
-import qualified Data.Time.Format                       as Time
-import qualified Data.Vector                            as V
-import qualified Network.HTTP.Conduit                   as HTTP
-import qualified Network.HTTP.Types.Status              as HTTP
 import qualified TiredPixel.Common.Net                  as N
+import           TiredPixel.Common.URI
 
 
 create :: Handler b Elasticsearch ()
