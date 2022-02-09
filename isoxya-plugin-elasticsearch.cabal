@@ -137,20 +137,18 @@ test-suite test-isoxya-plugin-elasticsearch
         Isoxya.Plugin.Elasticsearch.Test
     build-depends:
         bytestring,
-        hlint,
         hspec                           ==  2.*,
         lib-common,
         lib-common-test,
         lib-isoxya-plugin-elasticsearch,
         network-uri,
-        stylish-haskell,
         text,
         time,
     default-extensions:
         NoImplicitPrelude
     hs-source-dirs:
         test
-    ghc-options:
-        -Wno-error=unused-packages
     build-tool-depends:
-        hspec-discover:hspec-discover   ==  2.*
+        hlint:hlint,
+        hspec-discover:hspec-discover   ==  2.*,
+        stylish-haskell:stylish-haskell,
