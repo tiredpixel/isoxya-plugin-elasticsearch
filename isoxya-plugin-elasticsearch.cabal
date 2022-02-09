@@ -142,11 +142,14 @@ test-suite test-isoxya-plugin-elasticsearch
         lib-common-test,
         lib-isoxya-plugin-elasticsearch,
         network-uri,
+        stylish-haskell,
         text,
         time,
     default-extensions:
         NoImplicitPrelude
     hs-source-dirs:
         test
+    ghc-options:
+        -Wno-error=unused-packages
     build-tool-depends:
         hspec-discover:hspec-discover   ==  2.*
