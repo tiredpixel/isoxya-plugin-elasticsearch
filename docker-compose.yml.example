@@ -2,7 +2,8 @@
 version: "2.4"
 services:
   plugin_elasticsearch:
-    image: docker.io/tiredpixel/isoxya-plugin-elasticsearch.build:unstable
+    build: .
+    #image: docker.io/tiredpixel/isoxya-plugin-elasticsearch.build:unstable
     init: true
     volumes:
       - ./.stylish-haskell.yaml:/home/x/repo/.stylish-haskell.yaml
