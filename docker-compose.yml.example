@@ -1,7 +1,7 @@
 # vim: set ft=yaml:
 version: '2.4'
 services:
-  plugin_elasticsearch:
+  plugin-elasticsearch:
     build: .
     #image: docker.io/tiredpixel/isoxya-plugin-elasticsearch.build:unstable
     init: true
@@ -45,7 +45,7 @@ services:
     environment:
       ELASTICSEARCH_HOSTS: http://elasticsearch:9200
       SERVER_HOST: 0.0.0.0
-  test_echo:
+  test-echo:
     image: docker.io/keisato/http-echo:latest
     networks:
       - test
