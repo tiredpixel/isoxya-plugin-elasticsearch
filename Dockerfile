@@ -28,7 +28,7 @@ COPY --chown=x:x [ \
 RUN cabal update && \
     cabal build --only-dependencies --enable-tests
 #-------------------------------------------------------------------------------
-ENV PATH=${HOME}/.cabal/bin:$PATH \
+ENV PATH=${HOME}/repo/bin:${HOME}/.cabal/bin:$PATH \
     LANG=C.UTF-8
 
 CMD ["cabal", "run", "isoxya-plugin-elasticsearch", "--", \
