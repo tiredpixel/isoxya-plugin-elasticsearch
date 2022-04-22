@@ -6,8 +6,8 @@ services:
       target: builder
     init: true
     volumes:
-      - .:/home/x/plugin-elasticsearch
-      - /home/x/plugin-elasticsearch/dist-newstyle
+      - .:/home/x/r
+      - /home/x/r/dist-newstyle
     networks:
       elasticsearch: {}
       streamer:
