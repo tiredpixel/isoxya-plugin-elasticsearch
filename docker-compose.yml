@@ -1,18 +1,13 @@
-# vim: set ft=yaml:
 version: '2.4'
 services:
   plugin-elasticsearch:
-    build: .
-    #image: docker.io/tiredpixel/isoxya-plugin-elasticsearch.build:unstable
+    build:
+      context: .
+      target: builder
     init: true
     volumes:
-      - ./.stylish-haskell.yaml:/home/x/repo/.stylish-haskell.yaml
-      - ./bin:/home/x/repo/bin
-      - ./cabal.project.freeze:/home/x/repo/cabal.project.freeze
-      - ./isoxya-plugin-elasticsearch.cabal:/home/x/repo/isoxya-plugin-elasticsearch.cabal
-      - ./lib:/home/x/repo/lib
-      - ./src:/home/x/repo/src
-      - ./test:/home/x/repo/test
+      - .:/home/x/plugin-elasticsearch
+      - /home/x/plugin-elasticsearch/dist-newstyle
     networks:
       elasticsearch: {}
       streamer:
@@ -25,7 +20,7 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.17.2
     volumes:
-      - es:/usr/share/elasticsearch/data
+      - elasticsearch:/usr/share/elasticsearch/data
     networks:
       - elasticsearch
     restart: on-failure
@@ -51,7 +46,7 @@ services:
       - test
     restart: on-failure
 volumes:
-  es: {}
+  elasticsearch: {}
 networks:
   elasticsearch: {}
   streamer: {}

@@ -1,7 +1,11 @@
-.*/
+.dockerignore
+.env
+.git*
 Dockerfile
-cache/
+docker-compose*.yml*
+
 dist-newstyle/
-dist/
-docker-compose*.yml
+misc/
+
+cache/
 image/
