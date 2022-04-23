@@ -7,7 +7,7 @@ services:
     init: true
     volumes:
       - .:/home/x/r
-      - /home/x/r/dist-newstyle
+      - plugin-elasticsearch_dist-newstyle:/home/x/r/dist-newstyle
     networks:
       elasticsearch: {}
       streamer:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - elasticsearch
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.2
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.3
     volumes:
       - elasticsearch:/usr/share/elasticsearch/data
     networks:
@@ -29,7 +29,7 @@ services:
       discovery.type: single-node
       xpack.security.enabled: 'false'
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.17.2
+    image: docker.elastic.co/kibana/kibana:7.17.3
     networks:
       - elasticsearch
     ports:
@@ -46,6 +46,7 @@ services:
       - test
     restart: on-failure
 volumes:
+  plugin-elasticsearch_dist-newstyle: {}
   elasticsearch: {}
 networks:
   elasticsearch: {}
