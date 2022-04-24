@@ -6,8 +6,12 @@ services:
       target: builder
     init: true
     volumes:
-      - .:/home/x/r
-      - plugin-elasticsearch_dist-newstyle:/home/x/r/dist-newstyle
+      - ./bin:/home/x/r/bin
+      - ./cabal.project.freeze:/home/x/r/cabal.project.freeze
+      - ./isoxya-plugin-elasticsearch.cabal:/home/x/r/isoxya-plugin-elasticsearch.cabal
+      - ./lib:/home/x/r/lib
+      - ./src:/home/x/r/src
+      - ./test:/home/x/r/test
     networks:
       elasticsearch: {}
       streamer:
@@ -46,7 +50,6 @@ services:
       - test
     restart: on-failure
 volumes:
-  plugin-elasticsearch_dist-newstyle: {}
   elasticsearch: {}
 networks:
   elasticsearch: {}
