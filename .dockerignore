@@ -5,7 +5,6 @@ Dockerfile
 docker-compose*.yml*
 
 dist-newstyle/
-misc/
 
 cache/
 image/
