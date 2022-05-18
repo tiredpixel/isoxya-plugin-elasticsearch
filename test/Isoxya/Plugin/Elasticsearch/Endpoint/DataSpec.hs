@@ -67,7 +67,7 @@ load :: MonadIO m => Text -> Text -> Text -> Value -> m (Streamer, [Value])
 load url tag sfx dat = do
     let i = genStreamer url tag dat
     b <- readFileLBS $ fixtureResult url (tag <> sfx)
-    let Just dataE = sequence (decode <$> C8.lines b)
+    let Just dataE = mapM decode (C8.lines b)
     return (i, dataE)
 
 test :: Response -> [Value] -> SnapHspecM b ()
@@ -75,5 +75,5 @@ test res dataE = do
     rspStatus res `shouldBe` 200
     b <- getResponseBody res
     let b' = snd $ splitHeaderBody' b
-    let Just dataA = sequence (decode <$> C8.lines (fromStrict b'))
+    let Just dataA = mapM decode (C8.lines (fromStrict b'))
     dataA `shouldBeListJSON` dataE

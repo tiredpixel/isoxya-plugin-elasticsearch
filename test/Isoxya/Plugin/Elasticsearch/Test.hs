@@ -63,7 +63,7 @@ initElasticsearchTest = makeSnaplet "Elasticsearch" "" Nothing $ do
     addRoutes routesElasticsearch
     return $ Elasticsearch u n
     where
-        uDef = "http://test_echo"
+        uDef = "http://test-echo"
 
 parseTime :: String -> Maybe UTCTime
 parseTime = Time.parseTimeM False Time.defaultTimeLocale timeF
