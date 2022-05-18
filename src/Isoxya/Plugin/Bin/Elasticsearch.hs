@@ -31,7 +31,7 @@ main = do
         serveSnaplet S.config $ initApp u n
     S.wait done tId
     where
-        uDef = "http://elastic:password@es:9200"
+        uDef = "http://elastic:password@elasticsearch:9200"
         ver = toText $ showVersion version
 
 
